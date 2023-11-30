@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/Templates_fragment">
+
+    <fragment
+        android:id="@+id/Templates_fragment"
+        android:name="com.kostaspetsopoulos.cv_maker.TemplatesScreen"
+        android:label="Templates_fragment"
+        tools:layout="@layout/templates" >
+        <action
+            android:id="@+id/action_templatesFragment_to_fragment1"
+            app:destination="@id/fragment1" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment1"
+        android:name="com.kostaspetsopoulos.cv_maker.NameSurnameScreen"
+        android:label="fragment_1"
+        tools:layout="@layout/name_surname" >
+        <action
+            android:id="@+id/action_fragment1_to_fragment2"
+            app:destination="@id/fragment2" />
+        <action
+            android:id="@+id/action_fragment1_to_templatesFragment"
+            app:destination="@id/Templates_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment2"
+        android:name="com.kostaspetsopoulos.cv_maker.FacePhotoScreen"
+        android:label="fragment_2"
+        tools:layout="@layout/face_photo" >
+        <action
+            android:id="@+id/action_fragment2_to_fragment3"
+            app:destination="@id/fragment3" />
+        <action
+            android:id="@+id/action_fragment2_to_fragment1"
+            app:destination="@id/fragment1" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment3"
+        android:name="com.kostaspetsopoulos.cv_maker.PersonalInfoScreen"
+        android:label="fragment_3"
+        tools:layout="@layout/personal_info" >
+        <action
+            android:id="@+id/action_fragment3_to_fragment2"
+            app:destination="@id/fragment2" />
+        <action
+            android:id="@+id/action_fragment3_to_fragment4"
+            app:destination="@id/fragment4" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment4"
+        android:name="com.kostaspetsopoulos.cv_maker.EducationScreen"
+        android:label="fragment_4"
+        tools:layout="@layout/education" >
+        <action
+            android:id="@+id/action_fragment4_to_fragment3"
+            app:destination="@id/fragment3" />
+        <action
+            android:id="@+id/action_fragment4_to_fragment5"
+            app:destination="@id/fragment5" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment5"
+        android:name="com.kostaspetsopoulos.cv_maker.WorkExperienceScreen"
+        android:label="fragment_5"
+        tools:layout="@layout/work_experience" >
+        <action
+            android:id="@+id/action_fragment5_to_fragment4"
+            app:destination="@id/fragment4" />
+        <action
+            android:id="@+id/action_fragment5_to_fragment6"
+            app:destination="@id/fragment6" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment6"
+        android:name="com.kostaspetsopoulos.cv_maker.ProjectsScreen"
+        android:label="fragment_6"
+        tools:layout="@layout/projects" >
+        <action
+            android:id="@+id/action_fragment6_to_fragment5"
+            app:destination="@id/fragment5" />
+        <action
+            android:id="@+id/action_fragment6_to_fragment7"
+            app:destination="@id/fragment7" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment7"
+        android:name="com.kostaspetsopoulos.cv_maker.AboutMeScreen"
+        android:label="fragment_7"
+        tools:layout="@layout/about_me" >
+        <action
+            android:id="@+id/action_fragment7_to_fragment6"
+            app:destination="@id/fragment6" />
+        <action
+            android:id="@+id/action_fragment7_to_fragment8"
+            app:destination="@id/fragment8" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment8"
+        android:name="com.kostaspetsopoulos.cv_maker.InterestsScreen"
+        android:label="fragment_8"
+        tools:layout="@layout/interests" >
+        <action
+            android:id="@+id/action_fragment8_to_fragment7"
+            app:destination="@id/fragment7" />
+        <action
+            android:id="@+id/action_fragment8_to_fragment9"
+            app:destination="@id/fragment9" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment9"
+        android:name="com.kostaspetsopoulos.cv_maker.htmlPreviewScreen"
+        android:label="fragment_9"
+        tools:layout="@layout/html_preview" >
+        <action
+            android:id="@+id/action_fragment9_to_fragment8"
+            app:destination="@id/fragment8" />
+
+    </fragment>
+</navigation>

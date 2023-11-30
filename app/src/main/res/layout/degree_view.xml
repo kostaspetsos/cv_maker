@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="3dp"
+    android:layout_marginVertical="4dp"
+    android:background="@drawable/rounded_gradient_bg">
+
+    <TextView
+        android:id="@+id/textViewSchoolUniversity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="School / University"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/editTextSchoolUniversity_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewSchoolUniversity"
+        android:background="@android:color/transparent"
+        android:hint="e.g. Harvard University"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/textViewDegreeCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextSchoolUniversity_input"
+        android:text="Degree / Course"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/editTextDegreeCourse_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDegreeCourse"
+        android:background="@android:color/transparent"
+        android:hint="e.g. Applied Mathematics"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/textViewGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextDegreeCourse_input"
+        android:text="Grade / Score"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/editTextGrade_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewGrade"
+        android:background="@android:color/transparent"
+        android:hint="e.g. 4.0"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextGrade_input"
+        android:text="Time Period"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/editTextTime_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewTime"
+        android:background="@android:color/transparent"
+        android:hint="e.g. September 2019 - May 2023"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <ImageButton
+        android:id="@+id/btn_remove"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/textViewSchoolUniversity"
+        android:background="@drawable/remove_icon"
+        android:layout_marginEnd="16dp" />
+
+</RelativeLayout>
