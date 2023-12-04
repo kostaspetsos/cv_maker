@@ -35,25 +35,37 @@
             android:name=".NameSurnameScreen"
             android:exported="false"
             android:label="@string/title_activity_add_person"
-            android:theme="@style/Theme.Cv_maker.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
+            android:theme="@style/Theme.Cv_maker.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+
     </application>
 
 </manifest>

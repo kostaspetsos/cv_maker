@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="3dp"
@@ -24,10 +25,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewProjectTitle"
         android:background="@android:color/transparent"
+        android:inputType="textCapCharacters"
+        android:textAllCaps="true"
         android:hint="Enter project title"
         android:padding="8dp"
         android:textSize="16sp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="47dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp" />
@@ -66,5 +69,17 @@
         android:layout_alignTop="@id/textViewProjectTitle"
         android:background="@drawable/remove_icon"
         android:layout_marginEnd="16dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/textViewProjectTitle"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:padding="0dp"
+        app:srcCompat="@drawable/project_title_icon" />
 
 </RelativeLayout>

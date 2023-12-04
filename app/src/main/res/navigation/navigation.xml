@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/Templates_fragment">
+    app:startDestination="@id/fragment1">
 
     <fragment
         android:id="@+id/Templates_fragment"
@@ -112,7 +112,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment9"
-        android:name="com.kostaspetsopoulos.cv_maker.htmlPreviewScreen"
+        android:name="com.kostaspetsopoulos.cv_maker.HtmlPreviewScreen"
         android:label="fragment_9"
         tools:layout="@layout/html_preview" >
         <action

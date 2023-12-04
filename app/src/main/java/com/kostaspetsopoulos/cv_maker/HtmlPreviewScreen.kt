@@ -5,13 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
 import android.webkit.WebView
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
+import java.io.IOException
+//import com.itextpdf.kernel.exceptions.PdfException
 
-class htmlPreviewScreen : Fragment() {
+
+class HtmlPreviewScreen : Fragment() {
     private lateinit var viewModel: ResumeViewModel
 
 
@@ -25,17 +31,42 @@ class htmlPreviewScreen : Fragment() {
         // Initialize the ViewModel
         viewModel = ViewModelProvider(requireActivity()).get(ResumeViewModel::class.java)
 
-        var btnBck = view.findViewById<ImageButton>(R.id.back_btn)
+        val btnBck = view.findViewById<ImageButton>(R.id.back_btn)
         btnBck.setOnClickListener {
             findNavController().navigate(R.id.action_fragment9_to_fragment8)
         }
 
+        // Log user data for debugging
         logAllUserData()
 
         // Preview HTML on Screen
         val webView = view.findViewById<WebView>(R.id.preview_WebView)
+        webView.webChromeClient = WebChromeClient()
         val htmlGenerator = HtmlGenerator(requireContext(), viewModel, webView)
         htmlGenerator.generateHtml()
+
+        // Configure WebView settings
+        val webSettings: WebSettings = webView.settings
+        webSettings.builtInZoomControls = true
+        webSettings.displayZoomControls = false
+
+        // Generate PDF when the "Make PDF" button is clicked
+        val pdfGenerator = HtmlGenerator(requireContext(), viewModel, webView)
+
+        val makePdfBtn = view.findViewById<ImageButton>(R.id.makePDFbtn)
+        makePdfBtn.setOnClickListener {
+            val htmlContent = htmlGenerator.getFilledTemplate() // Modify this according to your implementation
+
+            // Get the user's first name and last name from the ViewModel
+            val firstName = viewModel.firstName ?: "Unknown"
+            val lastName = viewModel.lastName ?: "Unknown"
+
+            // Create a filename based on the user's first name, last name, and timestamp
+            val timestamp = System.currentTimeMillis()
+            val fileName = "${firstName}_${lastName}_cv_$timestamp.pdf"
+
+            pdfGenerator.generatePdf(htmlContent, fileName)
+        }
 
         return view
 
@@ -86,5 +117,9 @@ class htmlPreviewScreen : Fragment() {
         } else {
             Log.d("ViewModel", "degreeDataList is null")
         }
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
     }
 }

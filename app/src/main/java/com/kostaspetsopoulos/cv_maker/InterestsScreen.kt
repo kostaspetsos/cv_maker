@@ -59,7 +59,7 @@ class InterestsScreen : Fragment() {
         val btnNxt = view.findViewById<ImageButton>(R.id.preview_btn)
         btnNxt.setOnClickListener {
             Log.d("Before DataToHTML", "Before calling dataToHTML")
-            dataToHTML()
+            //dataToHTML()
             Log.d("After DataToHTML", "After calling dataToHTML")
             findNavController().navigate(R.id.action_fragment8_to_fragment9)
         }

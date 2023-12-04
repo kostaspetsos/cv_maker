@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#474747"> <!-- Set a light gray background color for the ConstraintLayout -->
 
     <TextView
         android:id="@+id/textViewTemplates"
@@ -24,11 +25,16 @@
         android:layout_height="0dp"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
+        app:layout_constraintDimensionRatio="H, 1:1.4"
         app:layout_constraintTop_toBottomOf="@+id/textViewTemplates"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_default="wrap"
-        android:layout_marginBottom="70dp" />
-
+        android:layout_marginBottom="70dp"
+        android:background="#ffffff"
+        android:isScrollContainer="true"
+        android:scrollbars="vertical|horizontal"
+        android:overScrollMode="never">
+    </WebView>
 
     <ImageButton
         android:id="@+id/back_btn"

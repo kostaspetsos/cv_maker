@@ -27,8 +27,11 @@ class NameSurnameScreen : Fragment() {
         // Initialize the ViewModel
         viewModel = ViewModelProvider(requireActivity()).get(ResumeViewModel::class.java)
 
-        // Initialize the ViewModel
-        viewModel = ViewModelProvider(requireActivity()).get(ResumeViewModel::class.java)
+        // Initialize the UI components
+        nameEditText = view.findViewById(R.id.editTextTextPersonName)
+        surnameEditText = view.findViewById(R.id.editTextTextPersonName2)
+        dateofBirthEditText = view.findViewById(R.id.editTextTextDateOfBirth)
+
 
         // Set the appropriate drawables for circle1 and circle2
         val circle1 = topBarLayout.findViewById<ImageView>(R.id.circle1)
