@@ -1,14 +1,70 @@
 <resources>
     <string name="app_name">cv_maker</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_add_person">add_person</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_activity_add_person" translatable="false">add_person</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
+
+    <string name="Templates">Templates</string>
+    <string name="TemplatesQuote">Customize your CV\'s appearance.\nFind your ideal design.</string>
+
+    <string name="Name">Name</string>
+    <string name="Surname">Surname</string>
+    <string name="DateOfBirth">Date Of Birth</string>
+
+    <string name="FacePhoto">Add a Face Photo</string>
+    <string name="Tip">Tip: Smile! The recruiter will see you as friendly and open minded. Also make sure the photo has good lighting and looks clear and professional.</string>
+
+    <string name="PersonalInfo">Personal Info</string>
+    <string name="PhoneNumber">Phone Number</string>
+    <string name="ContactLink">Contact Link</string>
+    <string name="PIhint">e.g. /in/brianMay</string>
+    <string name="Address">Address</string>
+    <string name="Email" translatable="false">Email</string>
+
+    <string name="Education">Education</string>
+    <string name="EducationQuote">Inject knowledge, erase the void.</string>
+
+    <string name="SchoolUniversity">School / University</string>
+    <string name="edHint1">e.g. Harvard University</string>
+    <string name="DegreeCourse">Degree / Course</string>
+    <string name="edHint2">e.g. Applied Mathematics</string>
+    <string name="GradeScore">Grade / Score</string>
+    <string name="edHint3">e.g. Score 4.0</string>
+    <string name="TimePeriod">Time Period</string>
+    <string name="edHint4">e.g. September 2019 - May 2023</string>
+
+    <string name="WorkExperience">Work Experience</string>
+    <string name="WEQuote">Work section needs life.\nSpice it up with your story!</string>
+
+    <string name="CompanyName">Company Name</string>
+    <string name="weHint1">Enter company name</string>
+    <string name="JobTitle">Job Title</string>
+    <string name="weHint2">Enter job title</string>
+    <string name="weTimePeriod">Time Period</string>
+    <string name="weHint3">Enter time period</string>
+    <string name="Details">Details</string>
+    <string name="weHint4">Enter details</string>
+
+    <string name="Projects">Projects</string>
+    <string name="ProjectsQuote">Project shelf looking empty.\nLet\'s stack it with your achievements!</string>
+
+    <string name="ProjectTitle">Project Title</string>
+    <string name="pHint1">Enter project title</string>
+    <string name="ProjectDescription">Project Description</string>
+    <string name="pHint2">Enter project description</string>
+
+    <string name="AboutMe">About Me</string>
+    <string name="GeneralInfo">General Information About Yourself</string>
+
+    <string name="Interests">Interests</string>
+
+    <string name="Preview">Preview</string>
 </resources>

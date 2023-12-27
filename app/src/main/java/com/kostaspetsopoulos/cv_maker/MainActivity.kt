@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         //Kanw disable to Night Mode  NA TO SVHSW ARGOTERA
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-        resumeViewModel = ViewModelProvider(this).get(ResumeViewModel::class.java) // Add this line
+            resumeViewModel = ViewModelProvider(this).get(ResumeViewModel::class.java) // Add this line
 
         Log.d("NameSurnameScreen", "Data saved: First Name: ${resumeViewModel.firstName}, Last Name: ${resumeViewModel.lastName}")
 

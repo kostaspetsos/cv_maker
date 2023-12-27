@@ -1,10 +1,10 @@
+// HtmlGenerator.kt
 package com.kostaspetsopoulos.cv_maker
 
-//import PdfGenerator
+import PdfGenerator
 import android.content.Context
 import android.webkit.WebView
-import java.io.*
-import org.slf4j.LoggerFactory
+import java.io.IOException
 
 class HtmlGenerator(
     private val context: Context,
@@ -12,14 +12,20 @@ class HtmlGenerator(
     private val webView: WebView
 ) {
 
-    fun getFilledTemplate(): String {
-        return fillTemplate()
-    }
-
     fun generateHtml() {
         try {
+            // Retrieve the selected template name from SharedPreferences
+            val sharedPreferences =
+                context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+            val selectedTemplateName =
+                sharedPreferences.getString("selected_template", "Template 1")
+
+            // Create the selected template using the TemplateFactory
+            val selectedTemplate =
+                TemplateFactory.createTemplate(selectedTemplateName ?: "")
+
             // Construct the HTML template with actual data
-            val filledTemplate = fillTemplate()
+            val filledTemplate = selectedTemplate.fillTemplate(viewModel)
 
             // Load the HTML into the WebView
             webView.loadDataWithBaseURL(null, filledTemplate, "text/html", "UTF-8", null)
@@ -32,288 +38,23 @@ class HtmlGenerator(
         }
     }
 
-    private fun fillTemplate(): String {
-        // Replace placeholders in the template with actual data
-        var filledTemplate = """
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Your CV</title>
-        <style>
-            .print-body {
-                background-color: #ffffff;
-            }
+    fun getFilledTemplate(): String {
+        // Retrieve the selected template name from SharedPreferences
+        val sharedPreferences =
+            context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+        val selectedTemplateName =
+            sharedPreferences.getString("selected_template", "Template 1")
 
-            body {
-                background-color: #ffffff; /* Set background color to white */
-                font-family: 'Cambria', serif;
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                width: 21cm;
-                min-height: 29.7cm
-            }
+        // Create the selected template using the TemplateFactory
+        val selectedTemplate =
+            TemplateFactory.createTemplate(selectedTemplateName ?: "")
 
-            .header h1 {
-                color: #333;
-                margin: 0;
-                margin-top: 70px;
-                margin-bottom: 10px;
-                font-size: 17px;
-            }
-
-            .header {
-                text-align: center;
-                background-color: #ffffff; /* Set background color to white */
-                padding: 3px; /* Add padding to the header */
-                margin-bottom: 0;
-            }
-
-            .personal-info {
-                margin: 0;
-                padding-top: 0;
-                padding-bottom: 0;
-                margin-bottom: 4px;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
-                font-size: 17px;
-            }
-
-            .personal-info p {
-                display: inline-block;
-                margin-right: 3px;
-            }
-            
-            hr {
-                margin: 0; /* Remove margin to eliminate space above and below */
-            }
-
-            .header img {
-                max-width: 100%;
-                max-height: 150px;
-                border-radius: 50%;
-                margin-top: 20px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            }
-            
-
-            .header h2,
-            .education h2,
-            .work-experience h2,
-            .projects h2,
-            .about-me h2,
-            .interests h2 {
-                color: #333;
-                padding-bottom: 5px;
-                margin-top: 20px;
-                margin-bottom: 0px;
-                font-size: 17px;
-                text-align: center;
-            }
-
-            h3 {
-                text-align: left;
-                color: #555;
-                margin-bottom: 5px;
-                font-size: 10px;
-            }
-
-            p {
-                margin: 0;
-                color: #333;
-            }
-
-            a {
-                color: #4285f4;
-                text-decoration: none;
-                font-size: 10px;
-            }
-
-            a:hover {
-                text-decoration: underline;
-            }
-        </style>
-    </head>
-    <body class="print-body">
-
-        <div class="header">
-            <h1>${viewModel.firstName} ${viewModel.lastName}</h1>            
-            <!-- Add photo here if available -->
-            <!--
-            <img src="${viewModel.profileImageUri}" alt="Your Photo">
-            -->
-        </div>
-
-        <div class="personal-info">
-            <p>${viewModel.address}</p>
-            <p>|</p>
-            <p>${viewModel.phoneNumber}</p>
-            <p>|</p>
-            <p>${viewModel.contactLink}</p>
-            <p>|</p>
-            <p>${viewModel.email}</p>
-        </div>
-
-        <hr> <!-- Add a horizontal line below the header -->
-
-        
-            ${generateEducationData()}
-            
-            ${generateWorkExperienceData()}
-    
-            ${generateProjectData()}  
-    
-            ${generateInterestsData()}
-
-            ${generateAboutMeData()}
-    
-        </body>
-        </html>
-    """.trimIndent()
-
-        return filledTemplate
-    }
-
-    private fun generateEducationData(): String {
-        val educationData = StringBuilder()
-        val educationList = viewModel.degreeDataList.value
-        if (educationList != null) {
-            for (item in educationList) {
-                educationData.append(
-                    """
-                <div class="education" style="text-align: center;">
-                    <h2>EDUCATION</h2>
-                </div>
-                <div class="education-item" style="padding: 5px; padding-top: 0; padding-left: 80px; padding-right: 80px; margin-bottom: 10px;">
-                    <div style="margin-bottom: 2px;">
-                        <p style="font-weight: bold; font-size: 17px; display: inline-block;">${item.schoolUniTitle}</p>
-                        <p style="font-size: 17px; margin-left: 10px; display: inline-block;">${item.degreePeriod}</p>
-                    </div>
-                    <div style="margin-bottom: 2px;">
-                        <p style="font-size: 17px; display: inline-block;">${item.degreeTitle}</p>
-                    </div>
-                    <div style="margin-bottom: 2px;">
-                        <p style="font-size: 17px; display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp;${item.degreeGrade}</p>
-                    </div>
-                </div>
-            """.trimIndent()
-                )
-            }
-        } else {
-            educationData.append("<p>No education data available</p>")
-        }
-        return educationData.toString()
-    }
-
-
-
-    private fun generateWorkExperienceData(): String {
-        val workExperienceData = StringBuilder()
-        val workExperienceList = viewModel.workExperienceList.value
-        if (workExperienceList != null) {
-            for (item in workExperienceList) {
-                workExperienceData.append(
-                    """
-                    <div class="work-experience" style="text-align: center;">
-                        <h2>WORK EXPERIENCE</h2>
-                    </div>
-                    <div class="experience-item" style="padding: 5px; padding-top: 0; padding-left: 80px; padding-right: 80px; margin-bottom: 10px;">
-                        <div style="display: flex; align-items: flex-start;">
-                            <p style="font-weight: bold; font-size: 17px; margin-bottom: 2px;">${item.companyName}</p>
-                            <p style="font-size: 17px; margin-left: auto; margin-bottom: 2px;">${item.timePeriod}</p>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <p style="font-size: 17px; margin-bottom: 2px;">${item.jobTitle}</p>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <p style="font-size: 17px; margin-bottom: 2px;">&nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp;${item.details}</p>
-                        </div>
-                    </div>
-                """.trimIndent()
-                )
-            }
-        } else {
-            workExperienceData.append("<p>No work experience data available</p>")
-        }
-        return workExperienceData.toString()
-    }
-
-    private fun generateProjectData(): String {
-        val projectData = StringBuilder()
-        val projectList = viewModel.projectList.value
-
-        if (projectList != null && projectList.isNotEmpty()) {
-
-
-            for (item in projectList) {
-                projectData.append(
-                    """
-                    <div class="projects" style="text-align: center;">
-                        <h2>PROJECTS</h2>
-                    </div>
-                <div class="project-item" style="padding: 5px; padding-top: 0; padding-left: 80px; padding-right: 80px; margin-bottom: 10px;">
-                        <div style="display: flex; align-items: flex-start;">
-                        <p style="font-weight: bold; font-size: 17px; margin-bottom: 2px;">${item.projectTitle}</p>
-                    </div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <p style="font-size: 17px; margin-bottom: 2px;">&nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp;${item.projectDescription}</p>
-                    </div>
-                </div>
-            """.trimIndent()
-                )
-            }
-        } else {
-            // No project data available, do not include the "PROJECTS" title
-        }
-
-        return projectData.toString()
-    }
-
-    private fun generateInterestsData(): String {
-        val interestsData = StringBuilder()
-        val interests = viewModel.interests
-
-        if (!interests.isNullOrBlank()) {
-            interestsData.append(
-                """
-            <div class="interests" style="padding: 5px; padding-top: 0; padding-left: 80px; padding-right: 80px;">
-                <h2>INTERESTS</h2>
-                <p style="margin: 0; text-align: justify; text-justify: inter-word; word-wrap: break-word; font-size: 17px;">$interests</p>
-            </div>
-        """.trimIndent()
-            )
-        }
-
-        return interestsData.toString()
-    }
-
-    private fun generateAboutMeData(): String {
-        val aboutMeData = StringBuilder()
-        val aboutMe = viewModel.aboutMe
-
-        if (!aboutMe.isNullOrBlank()) {
-            aboutMeData.append(
-                """
-            <div class="about-me" style="padding: 5px; padding-top: 0; padding-left: 80px; padding-right: 80px;">
-                <h2>ABOUT ME</h2>
-                <p style="font-size: 17px">Date of Birth: ${viewModel.dateOfBirth}</p>
-                <p style="margin: 0; text-align: justify; text-justify: inter-word; word-wrap: break-word; font-size: 17px;">$aboutMe</p>
-                
-            </div>
-        """.trimIndent()
-            )
-        }
-
-        return aboutMeData.toString()
+        // Return the filled template
+        return selectedTemplate.fillTemplate(viewModel)
     }
 
     fun generatePdf(htmlContent: String, fileName: String) {
         val pdfGenerator = PdfGenerator(context)
         pdfGenerator.generatePdf(htmlContent, fileName)
     }
-
 }

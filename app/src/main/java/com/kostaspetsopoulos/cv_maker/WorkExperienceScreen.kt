@@ -57,7 +57,7 @@ class WorkExperienceScreen : Fragment() {
             updateEmptyMessageVisibility(workExperienceDataList.isEmpty(), emptyMessage)
         }
 
-        Log.d("WorkExperiecneScreen", "Data saved: First Name: ${viewModel.firstName}, Last Name: ${viewModel.lastName}")
+        Log.d("WorkExperienceScreen", "Data saved: First Name: ${viewModel.firstName}, Last Name: ${viewModel.lastName}")
 
         return view
     }

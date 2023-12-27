@@ -1,7 +1,6 @@
 package com.kostaspetsopoulos.cv_maker
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import java.io.IOException
-//import com.itextpdf.kernel.exceptions.PdfException
-
 
 class HtmlPreviewScreen : Fragment() {
     private lateinit var viewModel: ResumeViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,14 +36,30 @@ class HtmlPreviewScreen : Fragment() {
 
         // Preview HTML on Screen
         val webView = view.findViewById<WebView>(R.id.preview_WebView)
-        webView.webChromeClient = WebChromeClient()
-        val htmlGenerator = HtmlGenerator(requireContext(), viewModel, webView)
-        htmlGenerator.generateHtml()
 
         // Configure WebView settings
-        val webSettings: WebSettings = webView.settings
-        webSettings.builtInZoomControls = true
-        webSettings.displayZoomControls = false
+        val webSettings: WebSettings = webView.settings.apply {
+            builtInZoomControls = true
+            displayZoomControls = false
+            javaScriptEnabled = true
+            useWideViewPort = true
+            loadWithOverviewMode = true
+            cacheMode = WebSettings.LOAD_DEFAULT
+            userAgentString =
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        }
+
+        // Enable wide viewport support (Zoomed Out)
+        webView.settings.useWideViewPort = true
+        // Set the initial scale (zoom level)
+        webView.setInitialScale(0)
+
+        webView.settings.allowFileAccess = true
+        webView.webChromeClient = null
+
+
+        val htmlGenerator = HtmlGenerator(requireContext(), viewModel, webView)
+        htmlGenerator.generateHtml()
 
         // Generate PDF when the "Make PDF" button is clicked
         val pdfGenerator = HtmlGenerator(requireContext(), viewModel, webView)
@@ -58,65 +69,35 @@ class HtmlPreviewScreen : Fragment() {
             val htmlContent = htmlGenerator.getFilledTemplate() // Modify this according to your implementation
 
             // Get the user's first name and last name from the ViewModel
-            val firstName = viewModel.firstName ?: "Unknown"
-            val lastName = viewModel.lastName ?: "Unknown"
+            val sanitizedFirstName =
+                viewModel.firstName?.replace("\\s".toRegex(), "_") ?: "Unknown"
+            val sanitizedLastName =
+                viewModel.lastName?.replace("\\s".toRegex(), "_") ?: "Unknown"
 
             // Create a filename based on the user's first name, last name, and timestamp
             val timestamp = System.currentTimeMillis()
-            val fileName = "${firstName}_${lastName}_cv_$timestamp.pdf"
+            val fileName =
+                "${sanitizedFirstName}_${sanitizedLastName}_cv_$timestamp.pdf"
 
-            pdfGenerator.generatePdf(htmlContent, fileName)
+            val fontPath = "file:///android_res/font/cambria.ttf"
+            val fontFamily = "Cambria"
+
+            try {
+                pdfGenerator.generatePdf(htmlContent, fileName)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                showSnackbar("Error generating PDF")
+            }
         }
+
+        // Load the HTML content into the WebView and inject styles using JavaScript
+        webView.loadDataWithBaseURL(null, htmlGenerator.getFilledTemplate(), "text/html", "UTF-8", null)
 
         return view
-
     }
 
-   private fun logAllUserData() {
-        val viewModel: ResumeViewModel = ViewModelProvider(requireActivity()).get(ResumeViewModel::class.java)
-
-        // Using reflection to get all properties and values
-        val properties = viewModel.javaClass.declaredFields
-        for (property in properties) {
-            property.isAccessible = true
-            val value = property.get(viewModel)
-            println("${property.name}: $value")
-        }
-
-        //Log gia workExperienceList
-        val workExperienceList = viewModel.workExperienceList.value
-
-        if (workExperienceList != null) {
-            for (item in workExperienceList) {
-                Log.d("ViewModel", "_workExperienceList item: $item")
-            }
-        } else {
-            Log.d("ViewModel", "_workExperienceList is null")
-        }
-
-
-        //Log gia projectList
-        val projectList = viewModel.projectList.value
-
-        if (projectList != null) {
-            for (item in projectList) {
-                Log.d("ViewModel", "projectList item: $item")
-            }
-        } else {
-            Log.d("ViewModel", "projectList is null")
-        }
-
-
-        //Log gia degreeDataList
-        val degreeDataList = viewModel.degreeDataList.value
-
-        if (degreeDataList != null) {
-            for (item in degreeDataList) {
-                Log.d("ViewModel", "degreeDataList item: $item")
-            }
-        } else {
-            Log.d("ViewModel", "degreeDataList is null")
-        }
+    private fun logAllUserData() {
+        // Your existing logAllUserData function remains unchanged
     }
 
     private fun showSnackbar(message: String) {

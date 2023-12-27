@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">cv_maker</string>
+    <string name="Templates">Πρότυπα</string>
+    <string name="Name">Όνομα</string>
+    <string name="Surname">Επίθετο</string>
+    <string name="DateOfBirth">Ημ. Γέννησης</string>
+    <string name="Tip">Tip: Χαμογέλα! Το άτομο που θα σε προσλάβει θα σε δεί ως ένα φιλικό και ανοιχτόμυαλο άτομο. Επίσης σιγουρέψου πως η φωτογραφία έχει καλό φωτισμό και φαίνεται καθαρή και επαγγελματική.</string>
+    <string name="FacePhoto">Προσθήκη Φωτογραφίας</string>
+    <string name="PersonalInfo">Προσωπικά Στοιχεία</string>
+    <string name="PhoneNumber">Τηλέφωνο</string>
+    <string name="ContactLink">Σύνδεσμος LinkedIn</string>
+    <string name="Address">Διέυθυνση</string>
+    <string name="Education">Εκπαίδευση</string>
+    <string name="EducationQuote">Εμπλούτισε τις γνώσεις σου, σβήσε το κενό.</string>
+    <string name="SchoolUniversity">Σχολείο / Πανεπιστήμιο</string>
+    <string name="TimePeriod">Χρονική Περίοδος</string>
+    <string name="GradeScore">Βαθμός</string>
+    <string name="DegreeCourse">Πτυχίο / Μάθημα</string>
+    <string name="edHint1">π.χ. Εθνικό Μετσόβιο Πολυτεχνείο</string>
+    <string name="edHint2">π.χ. Ηλεκτρονικών Μηχανικών</string>
+    <string name="edHint3">π.χ. Βαθμός 6.9</string>
+    <string name="edHint4">π.χ. Σεπ 2018 - Μάιος 2023</string>
+    <string name="WorkExperience">Εργασιακή Εμπειρία</string>
+    <string name="weHint1">π.χ. Κατάστημα Ένδυσης</string>
+    <string name="weHint2">π.χ. Υπάλληλος Ταμείου</string>
+    <string name="weHint3">π.χ. 2018 - 2020</string>
+    <string name="WEQuote">Αυτή η καρτέλα χρειάζεται λίγη ζωντάνια!</string>
+    <string name="weHint4">" "</string>
+    <string name="CompanyName">Τίτλος Εταιρίας / Εργασίας</string>
+    <string name="JobTitle">θέση Εργασίας</string>
+    <string name="weTimePeriod">Χρονική Περίοδος</string>
+    <string name="Details">Λεπτομέρειες</string>
+    <string name="PIhint">π.χ. /in/brianMay</string>
+    <string name="Projects">Projects</string>
+    <string name="ProjectsQuote">Το ράφι των project σου φαίνεται άδειο...</string>
+    <string name="ProjectTitle">Τίτλος Project</string>
+    <string name="pHint1">Πληκτρολόγισε τον τίτλο</string>
+    <string name="ProjectDescription">Περιγραφή του Project</string>
+    <string name="pHint2">"Πληκτρολόγησε την περιγραφή "</string>
+    <string name="AboutMe">Το Προφίλ Μου</string>
+    <string name="GeneralInfo">Γενικές πληροφορίες για τον εαυτό σου.</string>
+    <string name="Interests">Ενδιαφέροντα</string>
+    <string name="TemplatesQuote">Προσαρμόστε την εμφάνιση του βιογραφικού σας. Βρείτε το ιδανικό σας σχέδιο.</string>
+    <string name="Preview">Προεπισκόπηση</string>
+</resources>

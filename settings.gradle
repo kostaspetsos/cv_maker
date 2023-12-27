@@ -7,6 +7,7 @@ pluginManagement {
             url = uri("https://storage.googleapis.com/r8-releases/raw")
         }
     }
+
     plugins {
         id 'com.android.application' version '7.2.1'
         id 'com.android.library' version '7.2.1'

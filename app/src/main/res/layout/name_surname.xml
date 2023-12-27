@@ -8,115 +8,143 @@
     tools:context=".NameSurnameScreen">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/outerConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:textColor="#000000"
-            android:layout_width="wrap_content"
+
+        <!-- top bar layout -->
+        <FrameLayout
+            android:id="@+id/fragment1"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="100dp"
-            android:text="Name"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:textColor="#000000"
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottomButtonContainer"
+            app:layout_constraintTop_toBottomOf="@+id/fragment1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/innerConstraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/Name"
+                    android:textColor="#000000"
+                    android:textSize="34sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="100dp"
+                    android:text="@string/Surname"
+                    android:textColor="#000000"
+                    android:textSize="34sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="100dp"
+                    android:text="@string/DateOfBirth"
+                    android:textColor="#000000"
+                    android:textSize="34sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                <EditText
+                    android:id="@+id/editTextTextPersonName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <EditText
+                    android:id="@+id/editTextTextPersonName2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                <EditText
+                    android:id="@+id/editTextTextDateOfBirth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <!-- ConstraintLayout for bottom buttons -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomButtonContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="100dp"
-            android:text="Surname"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            android:background="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:textColor="#000000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="100dp"
-            android:text="Date Of Birth"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            <ImageButton
+                android:id="@+id/next_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="64dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/button_right"
+                android:clickable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        <EditText
-            android:id="@+id/editTextTextPersonName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="50dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            <ImageButton
+                android:id="@+id/back_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/cancel_icon_button"
+                android:clickable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <EditText
-            android:id="@+id/editTextTextPersonName2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="50dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <EditText
-            android:id="@+id/editTextTextDateOfBirth"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginTop="20dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-
-        <ImageButton
-            android:id="@+id/next_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="64dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/button_right"
-            android:clickable="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <ImageButton
-            android:id="@+id/back_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/cancel_icon_button"
-            android:clickable="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- New FrameLayout for adding the top bar layout -->
-    <FrameLayout
-        android:id="@+id/fragment1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
 </FrameLayout>

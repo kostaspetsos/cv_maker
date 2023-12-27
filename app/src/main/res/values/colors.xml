@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="myBlue">#30c9cd</color>
     <color name="myPurple">#330e6a</color>
+    <color name="statusBarColor">#316c9b</color>
 </resources>

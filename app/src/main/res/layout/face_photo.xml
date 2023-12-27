@@ -15,9 +15,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
-            android:text="Add a Face Photo"
+            android:text="@string/FacePhoto"
             android:textColor="#000000"
-            android:textSize="34sp"
+            android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +31,8 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_left"
             android:clickable="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <ImageButton
@@ -43,8 +43,8 @@
             android:layout_marginBottom="8dp"
             android:background="@drawable/button_right"
             android:clickable="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
             android:id="@+id/addPhoto_btn"
@@ -82,10 +82,12 @@
         <TextView
             android:id="@+id/textTip"
             android:layout_width="338dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="Tip: Smile! The recruiter will see you as friendly and open minded. Also make sure the photo has good lighting and looks clear and professional."
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:text="@string/Tip"
             app:layout_constraintBottom_toTopOf="@+id/next_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

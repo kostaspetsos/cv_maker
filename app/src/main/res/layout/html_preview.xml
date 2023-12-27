@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#474747"> <!-- Set a light gray background color for the ConstraintLayout -->
+    android:background="#FFFFFF"> <!-- Set a light gray background color for the ConstraintLayout -->
 
     <TextView
         android:id="@+id/textViewTemplates"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="0dp"
         android:background="?attr/colorPrimary"
         android:gravity="center"
-        android:text="Preview"
-        android:textColor="#ffffff"
+        android:text="@string/Preview"
+        android:textColor="#FFFFFF"
         android:textSize="34sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <WebView
         android:id="@+id/preview_WebView"
@@ -30,9 +29,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_default="wrap"
         android:layout_marginBottom="70dp"
-        android:background="#ffffff"
+        android:background="#FFFFFF"
         android:isScrollContainer="true"
         android:scrollbars="vertical|horizontal"
+        android:layout_marginHorizontal="15dp"
         android:overScrollMode="never">
     </WebView>
 

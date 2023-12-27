@@ -10,8 +10,9 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/myBlue</item>
-        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/statusBarColor</item>
+
+        <item name="android:fontFamily">@font/robotomedium</item>
     </style>
 
     <style name="Theme.Cv_maker.NoActionBar">

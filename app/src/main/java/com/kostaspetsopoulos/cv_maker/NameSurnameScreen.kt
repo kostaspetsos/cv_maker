@@ -5,8 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.*
+import androidx.core.view.ViewCompat
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 
@@ -32,11 +36,23 @@ class NameSurnameScreen : Fragment() {
         surnameEditText = view.findViewById(R.id.editTextTextPersonName2)
         dateofBirthEditText = view.findViewById(R.id.editTextTextDateOfBirth)
 
-
         // Set the appropriate drawables for circle1 and circle2
         val circle1 = topBarLayout.findViewById<ImageView>(R.id.circle1)
-
         circle1.setImageResource(R.drawable.tab_icon)
+
+        // Set the WindowInsetsController to handle system window insets
+        ViewCompat.setOnApplyWindowInsetsListener(view) { _, insets ->
+            val systemInsets = insets.systemGestureInsets
+            view.findViewById<View>(R.id.next_btn).updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = systemInsets.bottom
+            }
+            view.findViewById<View>(R.id.back_btn).updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = systemInsets.bottom
+            }
+            insets
+        }
+
+
     }
 
     override fun onPause() {
@@ -57,11 +73,24 @@ class NameSurnameScreen : Fragment() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString("savedName", viewModel.firstName)
-        outState.putString("savedSurname", viewModel.lastName)
-        outState.putString("savedDateOfBirth", viewModel.dateOfBirth)
+
+        viewModel?.let {
+            outState.putString("savedName", it.firstName)
+            outState.putString("savedSurname", it.lastName)
+            outState.putString("savedDateOfBirth", it.dateOfBirth)
+        }
     }
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Initialize the ViewModel only if it hasn't been initialized yet
+        if (!::viewModel.isInitialized) {
+            viewModel = ViewModelProvider(this).get(ResumeViewModel::class.java)
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,9 +98,6 @@ class NameSurnameScreen : Fragment() {
     ): View? {
         Log.d("NameSurnameScreen", "Fragment Created")
         val view = inflater.inflate(R.layout.name_surname, container, false)
-
-        // Initialize the ViewModel
-        viewModel = ViewModelProvider(requireActivity()).get(ResumeViewModel::class.java)
 
         nameEditText = view.findViewById(R.id.editTextTextPersonName)
         surnameEditText = view.findViewById(R.id.editTextTextPersonName2)
@@ -88,7 +114,7 @@ class NameSurnameScreen : Fragment() {
 
         val btnCancel = view.findViewById<ImageButton>(R.id.back_btn)
         btnCancel.setOnClickListener {
-            Log.d("NameSurnameScreen", "Cancel Button Pressed.   Heading back to templates..")
+            Log.d("NameSurnameScreen", "Cancel Button Pressed. Heading back to templates..")
             findNavController().navigate(R.id.action_fragment1_to_templatesFragment)
         }
 
@@ -102,6 +128,7 @@ class NameSurnameScreen : Fragment() {
             dateofBirthEditText.setText(savedDateOfBirth)
             Log.d("NameSurnameScreen", "Data restored: First Name: $savedName, Last Name: $savedSurname")
         }
+
 
         return view
     }

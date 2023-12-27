@@ -1,12 +1,12 @@
-package com.kostaspetsopoulos.cv_maker
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.kostaspetsopoulos.cv_maker.R
+import com.kostaspetsopoulos.cv_maker.TemplateItem
 
-class TemplateAdapter(private val templateList: List<TemplateItem>, private val onItemClick: (Int) -> Unit) :
+class TemplateAdapter(private val templateList: List<TemplateItem>, private val onItemClick: (TemplateItem) -> Unit) :
     RecyclerView.Adapter<TemplateAdapter.TemplateViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TemplateViewHolder {
@@ -16,11 +16,12 @@ class TemplateAdapter(private val templateList: List<TemplateItem>, private val 
     }
 
     override fun onBindViewHolder(holder: TemplateViewHolder, position: Int) {
-        holder.bind()
+        // Bind the data for each item
+        holder.bind(templateList[position])
 
         // Set a click listener for each item
         holder.itemView.setOnClickListener {
-            onItemClick.invoke(position)
+            onItemClick.invoke(templateList[position])
         }
     }
 
@@ -29,10 +30,13 @@ class TemplateAdapter(private val templateList: List<TemplateItem>, private val 
     }
 
     class TemplateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind() {
-            // You can perform any binding or customization here
-            // As per your request, I'm leaving it empty for now
+        private val templateBackground: ImageView = itemView.findViewById(R.id.templateBackground)
+
+        fun bind(templateItem: TemplateItem) {
+            // Set the template background image
+            templateBackground.setImageResource(templateItem.imageResourceId)
         }
     }
 }
+
 

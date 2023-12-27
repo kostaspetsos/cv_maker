@@ -24,9 +24,6 @@ class InterestsScreen : Fragment() {
         // Initialize the ViewModel
         viewModel = ViewModelProvider(requireActivity()).get(ResumeViewModel::class.java)
 
-        // Initialize the ViewModel
-        viewModel = ViewModelProvider(requireActivity()).get(ResumeViewModel::class.java)
-
         // Set the appropriate drawables for circle1 and circle2
         val circle8 = topBarLayout.findViewById<ImageView>(R.id.circle8)
 
