@@ -8,6 +8,8 @@ object TemplateFactory {
         return when (templateName) {
             "Template 1" -> Template1()
             "Template 2" -> Template2()
+            "Template 3" -> Template3()
+            "Template 4" -> Template4()
             // Add more templates as needed
             else -> Template1() // Default to Template1 if the templateName is not recognized
         }

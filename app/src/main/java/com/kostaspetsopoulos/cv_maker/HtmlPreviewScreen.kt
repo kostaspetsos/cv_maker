@@ -1,6 +1,13 @@
 package com.kostaspetsopoulos.cv_maker
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,13 +15,19 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.widget.ImageButton
+import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import java.io.File
 
 class HtmlPreviewScreen : Fragment() {
     private lateinit var viewModel: ResumeViewModel
+    companion object {
+        private const val REQUEST_CODE_PICK_DIRECTORY = 123
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +38,30 @@ class HtmlPreviewScreen : Fragment() {
 
         // Initialize the ViewModel
         viewModel = ViewModelProvider(requireActivity()).get(ResumeViewModel::class.java)
+
+        // Listener for the documents_folder button
+        val documentsFolder = view?.findViewById<ImageButton>(R.id.documents_folder)
+        documentsFolder?.setOnClickListener {
+            Log.d("HtmlPreviewScreen", "documentsFolder button clicked")
+
+            // Open file manager to select a directory
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+            intent.addCategory(Intent.CATEGORY_DEFAULT)
+            intent.flags = Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+
+            try {
+                startActivityForResult(intent, REQUEST_CODE_PICK_DIRECTORY)
+                Log.d("HtmlPreviewScreen", "File manager opened successfully")
+            } catch (e: ActivityNotFoundException) {
+                Log.e("HtmlPreviewScreen", "No file manager app found", e)
+                showSnackbar("No file manager app found")
+            }
+        }
+
+
+
+
+
 
         val btnBck = view.findViewById<ImageButton>(R.id.back_btn)
         btnBck.setOnClickListener {
@@ -48,11 +85,10 @@ class HtmlPreviewScreen : Fragment() {
             userAgentString =
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
         }
+        // Set the initial scale (zoom level) to 100%
+        webView.setInitialScale(100)
 
-        // Enable wide viewport support (Zoomed Out)
-        webView.settings.useWideViewPort = true
-        // Set the initial scale (zoom level)
-        webView.setInitialScale(0)
+
 
         webView.settings.allowFileAccess = true
         webView.webChromeClient = null
@@ -91,7 +127,9 @@ class HtmlPreviewScreen : Fragment() {
         }
 
         // Load the HTML content into the WebView and inject styles using JavaScript
-        webView.loadDataWithBaseURL(null, htmlGenerator.getFilledTemplate(), "text/html", "UTF-8", null)
+        val htmlContent = htmlGenerator.getFilledTemplate()
+        val styledHtmlContent = "<meta name=\"viewport\" content=\"width=450\">$htmlContent"
+        webView.loadDataWithBaseURL(null, styledHtmlContent, "text/html", "UTF-8", null)
 
         return view
     }
@@ -103,4 +141,33 @@ class HtmlPreviewScreen : Fragment() {
     private fun showSnackbar(message: String) {
         Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_PICK_DIRECTORY && resultCode == Activity.RESULT_OK && data != null) {
+            // Handle the directory selection here
+            val uri = data.data
+            Log.d("HtmlPreviewScreen", "Selected directory URI: $uri")
+
+            // Save the selected directory URI
+            saveSelectedDirectoryUri(uri)
+        }
+    }
+
+
+    private fun saveSelectedDirectoryUri(uri: Uri?) {
+        // Save the selected directory URI to SharedPreferences or any other storage mechanism
+        if (uri != null) {
+            val sharedPref = requireActivity().getPreferences(Context.MODE_PRIVATE)
+            with(sharedPref.edit()) {
+                putString("selected_directory_uri", uri.toString())
+                apply()
+            }
+            Log.d("HtmlPreviewScreen", "Selected directory URI saved: $uri")
+        } else {
+            Log.e("HtmlPreviewScreen", "Selected directory URI is null")
+        }
+    }
+
+
 }

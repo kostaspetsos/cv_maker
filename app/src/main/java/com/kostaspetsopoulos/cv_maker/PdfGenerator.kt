@@ -3,7 +3,9 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Environment
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -37,13 +39,10 @@ class PdfGenerator(private val context: Context) {
     }
 
     private fun savePdf(htmlContent: String, fileName: String) {
-        val folderName = "CV Maker"
-        val folder = File(
-            context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS),
-            folderName
-        )
+        val folderName = "generatedCVs" // New folder name
+        val folder = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) // Use app-specific external storage directory
 
-        if (!folder.exists()) {
+        if (folder != null && !folder.exists()) {
             folder.mkdirs() // Create the folder if it doesn't exist
         }
 
@@ -55,9 +54,6 @@ class PdfGenerator(private val context: Context) {
             val pdfDoc = PdfDocument(writer)
             pdfDoc.defaultPageSize = PageSize.A4
 
-            // Create an output stream
-            val outputStream = FileOutputStream(filePath)
-
             // Create Document and set margins
             val document = Document(pdfDoc)
             document.setMargins(0f, 0f, 0f, 0f)
@@ -66,15 +62,17 @@ class PdfGenerator(private val context: Context) {
             properties.baseUri = "/"
             HtmlConverter.convertToPdf(htmlContent, pdfDoc, properties)
 
-
-            // Close the output stream
-            outputStream.close()
+            // Close the document
+            document.close()
 
             // Show a success message on the screen using Toast
             showToast("PDF generated successfully: ${filePath.absolutePath}")
 
             // Open the generated PDF automatically
             openPdf(filePath)
+
+            // Log the saved location
+            Log.d("PdfGenerator", "PDF saved at: ${filePath.absolutePath}")
         } catch (e: IOException) {
             e.printStackTrace()
 
@@ -88,17 +86,22 @@ class PdfGenerator(private val context: Context) {
     }
 
     private fun openPdf(file: File) {
+        // Generate a content URI for the file using FileProvider
         val uri = FileProvider.getUriForFile(
             context,
             "${context.packageName}.provider",
             file
         )
 
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.setDataAndType(uri, "application/pdf")
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
+        // Create an intent to view the PDF file
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, "application/pdf")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+
+        // Start the activity to view the PDF file
         try {
             context.startActivity(intent)
         } catch (e: ActivityNotFoundException) {

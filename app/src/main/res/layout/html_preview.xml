@@ -18,6 +18,17 @@
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/documents_folder"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/documents_icon"
+        android:clickable="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"/>
+
     <WebView
         android:id="@+id/preview_WebView"
         android:layout_width="match_parent"
