@@ -1,9 +1,10 @@
+package com.kostaspetsopoulos.cv_maker
+
 import android.Manifest
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Environment
 import android.util.Log
 import android.widget.Toast
@@ -13,18 +14,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.itextpdf.html2pdf.ConverterProperties
 import com.itextpdf.html2pdf.HtmlConverter
+import com.itextpdf.io.font.PdfEncodings
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.kernel.geom.PageSize
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.font.FontProvider
-import com.kostaspetsopoulos.cv_maker.BuildConfig
 import com.kostaspetsopoulos.cv_maker.R
 import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
 
-class PdfGenerator(private val context: Context) {
+class PdfGenerator(private val context: Context, private val templateName: String) {
 
     companion object {
         private const val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 123
@@ -39,28 +39,44 @@ class PdfGenerator(private val context: Context) {
     }
 
     private fun savePdf(htmlContent: String, fileName: String) {
-        val folderName = "generatedCVs" // New folder name
-        val folder = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS) // Use app-specific external storage directory
+        val folderName = "Documents" // Use the Documents directory
+        val folder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
 
-        if (folder != null && !folder.exists()) {
+        if (!folder.exists()) {
             folder.mkdirs() // Create the folder if it doesn't exist
         }
 
         val filePath = File(folder, fileName)
 
         try {
-            // Create a PdfDocument with A4 page size
+            // Create a PdfDocument with custom page size
             val writer = PdfWriter(filePath)
             val pdfDoc = PdfDocument(writer)
-            pdfDoc.defaultPageSize = PageSize.A4
 
-            // Create Document and set margins
-            val document = Document(pdfDoc)
-            document.setMargins(0f, 0f, 0f, 0f)
+            // Adjust page size and margins
+            val pageSize = PageSize.A4
+            val document = Document(pdfDoc, pageSize)
+            document.setMargins(20f, 20f, 20f, 20f) // Adjust margins as needed
 
             val properties = ConverterProperties()
-            properties.baseUri = "/"
+            properties.baseUri = "file:///android_asset/" // Set base URI for resolving relative image paths
+
+
+            //IF that checks what template the user selected and assigns it's Font accordingly.
+            if(templateName == "Template 5") {
+                // Create FontProvider and register the custom font
+                val fontProvider = FontProvider()
+                fontProvider.addFont(context.resources.openRawResource(R.raw.jost).readBytes(), PdfEncodings.IDENTITY_H)
+
+                // Set the FontProvider to the document
+
+                properties.fontProvider = fontProvider
+            }
+
+
+            // Convert HTML to PDF
             HtmlConverter.convertToPdf(htmlContent, pdfDoc, properties)
+
 
             // Close the document
             document.close()
@@ -77,9 +93,22 @@ class PdfGenerator(private val context: Context) {
             e.printStackTrace()
 
             // Show an error message on the screen using Toast
-            showToast("Error generating PDF")
+            showToast("Error generating PDF: ${e.message}")
+
+            // Log the exception
+            Log.e("PdfGenerator", "IOException: ${e.message}")
+        } catch (e: Exception) {
+            e.printStackTrace()
+
+            // Show an error message on the screen using Toast
+            showToast("Error generating PDF: ${e.message}")
+
+            // Log the exception
+            Log.e("PdfGenerator", "Exception: ${e.message}")
         }
     }
+
+
 
     private fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -92,7 +121,6 @@ class PdfGenerator(private val context: Context) {
             "${context.packageName}.provider",
             file
         )
-
 
         // Create an intent to view the PDF file
         val intent = Intent(Intent.ACTION_VIEW).apply {
@@ -124,3 +152,4 @@ class PdfGenerator(private val context: Context) {
         )
     }
 }
+

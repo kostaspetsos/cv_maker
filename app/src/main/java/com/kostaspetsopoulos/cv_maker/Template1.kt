@@ -24,10 +24,14 @@ class Template1 : Template {
             .print-body {
                 background-color: #ffffff;
             }
+            @font-face {
+                font-family: 'Jost';
+                src: url('jost.ttf') format('truetype');
+            }
 
             body {
                 background-color: #ffffff;
-                font-family: 'helvetica', serif;
+                font-family: 'Jost', sans-serif;
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;

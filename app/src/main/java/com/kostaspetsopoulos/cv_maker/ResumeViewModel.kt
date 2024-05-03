@@ -18,6 +18,10 @@ class ResumeViewModel : ViewModel() {
     var aboutMe: String = ""
     var interests: String = ""
 
+    var phoneLabel: Uri? = null
+    var emailLabel: Uri? = null
+    var addressLabel: Uri? = null
+    var contactLinkLabel: Uri? = null
 
     //Education Screen
     private val _degreeDataList = MutableLiveData<MutableList<DegreeData>>()
@@ -62,6 +66,12 @@ class ResumeViewModel : ViewModel() {
 
     init {
         _projectList.value = mutableListOf()
+
+        // Set URIs for the images
+        phoneLabel = Uri.parse("file:///android_asset/phone-jpg.jpg")
+        emailLabel = Uri.parse("file:///android_asset/email-white.png")
+        addressLabel = Uri.parse("file:///android_asset/location_icon.png")
+        contactLinkLabel = Uri.parse("file:///android_asset/link-black.png")
     }
 
     fun addProject(projectData: ProjectData) {

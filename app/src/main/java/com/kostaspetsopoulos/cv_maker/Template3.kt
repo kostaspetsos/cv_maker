@@ -6,6 +6,23 @@ class Template3 : Template {
     private val viewModel: ResumeViewModel = ResumeViewModel()
 
     override fun fillTemplate(viewModel: ResumeViewModel): String {
+
+        /* @font-face {
+            font-family: 'Jost';
+            src: url('file:///android_res/font/jost.ttf') format('truetype');
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            box-sizing: border-box;
+            width: 696px;
+            min-height: 29.7cm;
+        }
+         */
+
+
+
+
         // Replace placeholders in the template with actual data
         var filledTemplate = """
     <!DOCTYPE html>
@@ -63,7 +80,6 @@ class Template3 : Template {
 
         #profile-info {
             position: absolute;
-            
             align-items: center;
             margin-top: 20px;
             margin-left: 160px; /* Adjust as needed */

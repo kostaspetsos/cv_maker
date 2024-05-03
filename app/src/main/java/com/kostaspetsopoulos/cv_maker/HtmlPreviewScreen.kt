@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.provider.DocumentsContract
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,16 +16,13 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.widget.ImageButton
-import android.widget.Toast
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import java.io.File
 
 class HtmlPreviewScreen : Fragment() {
     private lateinit var viewModel: ResumeViewModel
+
     companion object {
         private const val REQUEST_CODE_PICK_DIRECTORY = 123
     }
@@ -39,70 +37,67 @@ class HtmlPreviewScreen : Fragment() {
         // Initialize the ViewModel
         viewModel = ViewModelProvider(requireActivity()).get(ResumeViewModel::class.java)
 
-        // Listener for the documents_folder button
-        val documentsFolder = view?.findViewById<ImageButton>(R.id.documents_folder)
-        documentsFolder?.setOnClickListener {
-            Log.d("HtmlPreviewScreen", "documentsFolder button clicked")
-
-            // Open file manager to select a directory
-            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-            intent.addCategory(Intent.CATEGORY_DEFAULT)
-            intent.flags = Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
-
-            try {
-                startActivityForResult(intent, REQUEST_CODE_PICK_DIRECTORY)
-                Log.d("HtmlPreviewScreen", "File manager opened successfully")
-            } catch (e: ActivityNotFoundException) {
-                Log.e("HtmlPreviewScreen", "No file manager app found", e)
-                showSnackbar("No file manager app found")
-            }
-        }
-
-
-
-
-
-
-        val btnBck = view.findViewById<ImageButton>(R.id.back_btn)
-        btnBck.setOnClickListener {
-            findNavController().navigate(R.id.action_fragment9_to_fragment8)
-        }
-
-        // Log user data for debugging
-        logAllUserData()
+        // Retrieve the selected template name from SharedPreferences
+        val sharedPreferences =
+            requireContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+        val selectedTemplateName =
+            sharedPreferences.getString("selected_template", "Template 1") ?: "Template 1"
 
         // Preview HTML on Screen
         val webView = view.findViewById<WebView>(R.id.preview_WebView)
 
         // Configure WebView settings
-        val webSettings: WebSettings = webView.settings.apply {
+        webView.settings.apply {
             builtInZoomControls = true
             displayZoomControls = false
             javaScriptEnabled = true
             useWideViewPort = true
             loadWithOverviewMode = true
+            allowFileAccess = true
             cacheMode = WebSettings.LOAD_DEFAULT
             userAgentString =
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+
+            // Enable support for loading custom fonts
+            setSupportZoom(true) // Optional: Enable zooming
+            builtInZoomControls = true // Optional: Enable built-in zoom controls
+            displayZoomControls = false // Optional: Hide zoom controls
+            allowFileAccess = true // Allow access to files
+            allowContentAccess = true // Allow access to the content URL
+
+
+            /*
+            // Apply font settings based on the selected template
+            when (selectedTemplateName) {
+                "Template 1", "Template 3", "Template 5" -> {
+                    // For templates 1, 3, and 5, use Jost font
+                    val fontPath = "file:///android_res/font/jost.ttf"
+                    val fontFamily = "Jost"
+                    setFontFamily(webView, fontPath, fontFamily)
+                }
+                "Template 2", "Template 4", "Template 6" -> {
+                    // For templates 2, 4, and 6, use Cambria font
+                    val fontPath = "file:///android_res/font/cambria.ttf"
+                    val fontFamily = "Cambria"
+                    setFontFamily(webView, fontPath, fontFamily)
+                }
+                else -> {
+                    // Default font settings
+                    // For any other template, use default font settings
+                }
+            }   */
         }
+
         // Set the initial scale (zoom level) to 100%
         webView.setInitialScale(100)
 
-
-
-        webView.settings.allowFileAccess = true
-        webView.webChromeClient = null
-
-
-        val htmlGenerator = HtmlGenerator(requireContext(), viewModel, webView)
+        val htmlGenerator = HtmlGenerator(requireContext(), viewModel, webView, selectedTemplateName)
         htmlGenerator.generateHtml()
 
         // Generate PDF when the "Make PDF" button is clicked
-        val pdfGenerator = HtmlGenerator(requireContext(), viewModel, webView)
-
         val makePdfBtn = view.findViewById<ImageButton>(R.id.makePDFbtn)
         makePdfBtn.setOnClickListener {
-            val htmlContent = htmlGenerator.getFilledTemplate() // Modify this according to your implementation
+            val htmlContent = htmlGenerator.getFilledTemplate()
 
             // Get the user's first name and last name from the ViewModel
             val sanitizedFirstName =
@@ -115,27 +110,22 @@ class HtmlPreviewScreen : Fragment() {
             val fileName =
                 "${sanitizedFirstName}_${sanitizedLastName}_cv_$timestamp.pdf"
 
-            val fontPath = "file:///android_res/font/cambria.ttf"
-            val fontFamily = "Cambria"
-
             try {
-                pdfGenerator.generatePdf(htmlContent, fileName)
+                htmlGenerator.generatePdf(htmlContent, fileName)
             } catch (e: Exception) {
                 e.printStackTrace()
                 showSnackbar("Error generating PDF")
             }
         }
 
-        // Load the HTML content into the WebView and inject styles using JavaScript
-        val htmlContent = htmlGenerator.getFilledTemplate()
-        val styledHtmlContent = "<meta name=\"viewport\" content=\"width=450\">$htmlContent"
-        webView.loadDataWithBaseURL(null, styledHtmlContent, "text/html", "UTF-8", null)
-
         return view
     }
 
-    private fun logAllUserData() {
-        // Your existing logAllUserData function remains unchanged
+    private fun setFontFamily(webView: WebView, fontPath: String, fontFamily: String) {
+        val javascript = "var style = document.createElement('style');" +
+                "style.innerHTML = '@font-face { font-family: $fontFamily; src: url($fontPath); }';" +
+                "document.head.appendChild(style);"
+        webView.evaluateJavascript(javascript, null)
     }
 
     private fun showSnackbar(message: String) {
@@ -154,7 +144,6 @@ class HtmlPreviewScreen : Fragment() {
         }
     }
 
-
     private fun saveSelectedDirectoryUri(uri: Uri?) {
         // Save the selected directory URI to SharedPreferences or any other storage mechanism
         if (uri != null) {
@@ -166,6 +155,33 @@ class HtmlPreviewScreen : Fragment() {
             Log.d("HtmlPreviewScreen", "Selected directory URI saved: $uri")
         } else {
             Log.e("HtmlPreviewScreen", "Selected directory URI is null")
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Listener for the documents_folder button
+        val documentsFolderButton = view.findViewById<ImageButton>(R.id.documents_folder)
+        documentsFolderButton.setOnClickListener {
+            openFileExplorerInDocumentsFolder()
+        }
+    }
+
+    private fun openFileExplorerInDocumentsFolder() {
+        val documentsUri = Uri.parse("content://com.android.externalstorage.documents/document/primary:Documents")
+
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "*/*" // Set the MIME type to match all files
+            putExtra(DocumentsContract.EXTRA_INITIAL_URI, documentsUri)
+        }
+
+        try {
+            startActivityForResult(intent, REQUEST_CODE_PICK_DIRECTORY)
+        } catch (e: ActivityNotFoundException) {
+            Log.e("HtmlPreviewScreen", "No file manager app found", e)
+            showSnackbar("No file manager app found")
         }
     }
 

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -16,10 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cv_maker"
         tools:targetApi="31">
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@xml/anim" />
 
+        <!-- Activities -->
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme"
@@ -30,31 +29,23 @@
             </intent-filter>
         </activity>
 
-
         <activity
             android:name=".NameSurnameScreen"
             android:exported="false"
             android:label="@string/title_activity_add_person"
-            android:theme="@style/Theme.Cv_maker.NoActionBar"
-            >
+            android:theme="@style/Theme.Cv_maker.NoActionBar">
         </activity>
 
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            >
+            android:exported="false"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
         </activity>
 
+        <!-- File Provider -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -64,7 +55,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
 
     </application>
 
