@@ -11,7 +11,7 @@ import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider // Import ViewModelProvider
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.dhaval2404.imagepicker.ImagePicker
 
@@ -23,7 +23,7 @@ class FacePhotoScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Top Bar Navigation Inflater
+        // Top Bar Navigation Inflater
         val topBarLayout = layoutInflater.inflate(R.layout.top_bar_navigation, null) as LinearLayout
         val frameLayout = view.findViewById<FrameLayout>(R.id.fragment2)
         frameLayout.addView(topBarLayout, 0) // Add the top bar at the top of the FrameLayout
@@ -33,11 +33,8 @@ class FacePhotoScreen : Fragment() {
 
         // Set the appropriate drawables for circle1 and circle2
         val circle2 = topBarLayout.findViewById<ImageView>(R.id.circle2)
-
         circle2.setImageResource(R.drawable.tab_icon)
     }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,13 +46,12 @@ class FacePhotoScreen : Fragment() {
         // Initialize the ViewModel
         viewModel = ViewModelProvider(requireActivity()).get(ResumeViewModel::class.java)
 
-
         val btnNxt = view.findViewById<ImageButton>(R.id.next_btn)
         btnNxt.setOnClickListener {
             findNavController().navigate(R.id.action_fragment2_to_fragment3)
         }
 
-        var btnBck = view.findViewById<ImageButton>(R.id.back_btn)
+        val btnBck = view.findViewById<ImageButton>(R.id.back_btn)
         btnBck.setOnClickListener {
             findNavController().navigate(R.id.action_fragment2_to_fragment1)
         }
@@ -72,10 +68,8 @@ class FacePhotoScreen : Fragment() {
                 }
         }
 
-
-
         // Restore the image if available
-        viewModel.profileImageUri?.let { uri ->
+        viewModel.getProfileImageUri()?.let { uri ->
             imageView.setImageURI(uri)
         }
 
@@ -97,7 +91,7 @@ class FacePhotoScreen : Fragment() {
             imageView.setImageURI(fileUri)
 
             // Update ViewModel with the selected image Uri
-            viewModel.profileImageUri = fileUri
+            viewModel.setProfileImageUri(fileUri)
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(activity, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
         } else {

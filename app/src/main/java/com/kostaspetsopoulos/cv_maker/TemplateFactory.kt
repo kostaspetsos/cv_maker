@@ -12,7 +12,12 @@ object TemplateFactory {
             "Template 4" -> Template4()
             "Template 5" -> Template5()
             "Template 6" -> Template6()
-            // Add more templates as needed
+            "Template 6 Responsive" -> Template6Responsive()
+            "Template 7" -> Template7()
+            "Template 7 Responsive" -> Template7Responsive()
+            "Template 8" -> Template8()
+            "Template 9" -> Template9()
+            "Template 10" -> Template10()
             else -> Template1() // Default to Template1 if the templateName is not recognized
         }
     }

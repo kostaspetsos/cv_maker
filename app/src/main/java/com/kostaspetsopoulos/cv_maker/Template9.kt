@@ -2,11 +2,11 @@ package com.kostaspetsopoulos.cv_maker
 
 import java.util.*
 
-class Template5 : Template {
+class Template9 : Template {
     private val viewModel: ResumeViewModel = ResumeViewModel()
 
     override fun fillTemplate(viewModel: ResumeViewModel): String {
-
+        // Replace placeholders in the template with actual data
         var filledTemplate = """
             <!DOCTYPE html>
             <html lang="en">
@@ -16,160 +16,239 @@ class Template5 : Template {
                 <title>Your CV</title>
                 <style>
                     body {
-                        font-family: 'helvetica', serif;
-                        box-sizing: border-box;
-                        width: 696px;
-                        min-height: 29.7cm;
-                    }
-   
-                    #profile-info {      /* NAME & SURNAME & contact-details    */
-                        position: relative;
-                        color: #32a895;
-                        z-index: 2;
-                        max-width: 696px;
-                    }
-                    
-                    .contact-details {
-                        margin-top: 2px;
-                    }
-                    
-                    .phone, .email, .address, .contactLink {
-                        display: inline-block;
-                        font-weight: 400;
-                        color: #4a4a4a;
-                    }
-                    
-                    .phone::after, 
-                    .email::after, 
-                    .address::after {
-                        content: "|";
-                        margin: 0 3px;
-                    }
-                    
-                    .value {
-                        margin-left: 3px;
-                    }
-                    
-                    #profile-info h2 {    /* Font size NAME & SURNAME */
-                        margin: 0;
-                        font-size: 30px;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                    }
-                    
-                    .contact-details .phone, 
-                    .contact-details .email, 
-                    .contact-details .address, 
-                    .contact-details .contactLink {
-                        font-size: 12px; /* Font size for phone, email, address, and contact link */
-                    }
-                    
-                    #education-section {
-                        margin-top: 40px;
-                    }
-                    
-                    #about-me-section,
-                    #projects-section,
-                    #experience-section,
-                    #interests-section {
-                        margin-top: 50px;
-                        color: #4a4a4a;
-                    }
-                    
-                    #about-me-section h3,
-                    #projects-section h3,
-                    #education-section h3,
-                    #experience-section h3,
-                    #interests-section h3 {
-                        font-size: 15px;
-                        color: #32a895;
-                        margin-bottom: 2px;
-                        page-break-after: avoid;
-                    }
-         
-                    .experience-item,
-                    .education-item {
-                        display: flex;
-                        font-size: 15px;
-                        align-items: flex-start;
-                        margin-bottom: 15px;
-                        color: #4a4a4a;
-                    }
-                    
-                    .time-period {
-                        width: 280px;
-                        font-weight: bold;
-                    }
-                    
-                    .education-details {
-                        margin-right: 0px;
-                        width: 600px;
-                    }
-                    
-                    .work-details {
-                        margin-right: 0px;
-                        width: 600px;
-                    }
-                    
-                    .job-details {
-                        overflow-wrap: break-word;
-                        word-wrap: break-word;
-                        margin-top: 5px;
-                        
-                    }
-                    
-                    .company,
-                    .university,
-                    .interests-title {
-                        font-weight: bold;
-                        color: #4a4a4a;
-                    }
-                    
-                    .project-title {
-                        font-weight: bold;
-                        margin-bottom: 5px;
-                        color: #4a4a4a;
-                    }
-                    
-                    .project-description {
-                        font-size: 15px;
-                        text-align: justify;
-                        text-justify: inter-word;
-                        word-wrap: break-word;
-                        margin-top: 0;
-                        margin-bottom: 0;
-                        color: #4a4a4a;
-                    }
-                    
-                    .project-item,
-                    .interests-item {
-                        margin-bottom: 15px;
-                        color: #4a4a4a;
-                        font-size: 15px;
-                    }
+    font-family: 'helvetica', serif;
+    box-sizing: border-box;
+    width: 696px;
+    min-height: 29.7cm;
+}
+
+/* Blue Bar on top of the page */
+#top-bar {  
+    width: 700px;
+    height: 120px; /* Double the original size */
+    display: flex;
+    justify-content: space-between;
+    background-color: #f9d0cc;
+    position: relative; /* Required for positioning children */
+    z-index: 0; 
+}
+
+#profile-photo {
+    width: 150px; 
+    height: 150px; 
+    border-radius: 50%;
+    position: absolute;
+    margin-left: 520px;
+    margin-top: 30px;
+    z-index: 2;
+}
+
+#profile-info {
+    position: absolute;
+    align-items: center;
+    margin-top: 30px;
+    margin-left: 20px; /* Adjust as needed */
+    color: white;
+    z-index: 2; /* Ensure the text is on top of the photo */
+    max-width: 450px;
+}
+
+#profile-info h2 {
+    margin: 0; /* Remove default margin */
+    font-size: 30px; /* Initial font size */
+    white-space: nowrap; /* Prevent line breaks */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
+}
+
+.phone {
+    position: absolute;
+    display: flex;
+    margin-left: 20px;
+    margin-top: 93px;
+    font-size: 13px;
+    font-weight: 400;
+    color: white;
+}
+
+.phone .label {
+    margin-right: 5px; /* Adjust spacing between label and value as needed */
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+}
+
+.email {
+    position: absolute;
+    display: flex;
+    margin-left: 200px;
+    margin-top: 93px;
+    font-size: 13px;
+    font-weight: 400;
+    color: white;
+}
+
+.email .label {
+    margin-right: 10px; /* Adjust spacing between label and value as needed */
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+}
+
+.address {
+    position: absolute;
+    display: flex;
+    margin-left: 20px;
+    margin-top: 130px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #4a4a4a;
+}
+
+.address .label {
+    margin-right: 5px; /* Adjust spacing between label and value as needed */
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a4a4a;
+}
+
+.contactLink {
+    position: absolute;
+    display: flex;
+    margin-left: 200px;
+    margin-top: 130px;
+    font-size: 13px;
+    font-weight: 400;
+    color: #4a4a4a;
+}
+
+.contactLink .label {
+    margin-right: 10px; /* Adjust spacing between label and value as needed */
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a4a4a;
+}
+
+#education-section {
+    margin-top: 100px;
+}
+
+#about-me-section,
+#projects-section,
+#education-section,
+#experience-section,
+#interests-section {
+    margin-top: 50px;
+    color: #4a4a4a;
+    page-break-inside: avoid; /* Prevents page break inside the section */
+}
+
+#about-me-section h3,
+#projects-section h3,
+#education-section h3,
+#experience-section h3,
+#interests-section h3 {
+    font-size: 18px;
+    color: #4a4a4a;
+    margin-bottom: 2px;
+    page-break-after: avoid; /* Prevents page break after header */
+    page-break-before: avoid; /* Prevents page break before header */
+}
+
+#about-me-section hr,
+#projects-section hr,
+#education-section hr,
+#experience-section hr,
+#interests-section hr {
+    border: 1px solid #f9d0cc;
+    margin-bottom: 15px;
+    margin-top: 2px;
+    page-break-after: avoid; /* Prevents page break after horizontal rule */
+    page-break-before: avoid; /* Prevents page break before horizontal rule */
+}
+
+.experience-item,
+.education-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    margin-bottom: 15px;
+    color: #4a4a4a;
+}
+
+.time-period {
+    width: 280px;
+}
+
+.education-details {
+    margin-right: 0px;
+    width: 600px;
+}
+
+.work-details {
+    margin-right: 0px;
+    width: 600px;
+}
+
+.job-details {
+    overflow-wrap: break-word; /* For newer browsers */
+    word-wrap: break-word; /* For older browsers */
+    margin-top: 5px;
+}
+
+.company,
+.university,
+.interests-title {
+    font-weight: bold;
+    color: #4a4a4a;
+}
+
+.project-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #4a4a4a;
+}
+
+.project-description {
+    font-size: 17px;
+    text-align: justify;
+    text-justify: inter-word;
+    word-wrap: break-word;
+    margin-top: 0; /* Remove any top margin */
+    margin-bottom: 0; /* Remove any bottom margin */
+    color: #4a4a4a;
+}
+
+.project-item,
+.interests-item {
+    margin-bottom: 15px;
+    color: #4a4a4a;
+}
 
                 </style>
             </head>
             <body>
                 <div id="top-bar">
-                         
+                        <img id="profile-photo" src="${viewModel.profileImageUri}" alt="Profile Photo">    
                     <div id="profile-info">
                         <h2 id="name-surname" style="font-weight: 600;">${viewModel.firstName} ${viewModel.lastName}</h2>
-                        <div class="contact-details">
-                            <div class="phone" data-label="Phone">
-                                <span class="value">${viewModel.phoneNumber}</span>
-                            </div>
-                            <div class="email" data-label="Email">
-                                <span class="value">${viewModel.email}</span>
-                            </div>
-                            <div class="address" data-label="Address">
-                                <span class="value">${viewModel.address}</span>
-                            </div>
-                            <div class="contactLink" data-label="LinkedIn">
-                                <span class="value">${viewModel.contactLink}</span>
-                            </div>
-                        </div>
+                    </div>
+                    
+                    <div class="phone">
+                        <span class="label">Phone:</span>
+                        <span class="value">${viewModel.phoneNumber}</span>
+                    </div>
+                    <div class="email">
+                        <span class="label">Email:</span>
+                        <span class="value">${viewModel.email}</span>
+                    </div>
+                    <div class="address">
+                        <span class="label">Address:</span>
+                        <span class="value">${viewModel.address}</span>
+                    </div>
+                    <div class="contactLink">
+                        <span class="label">LinkedIn:</span>
+                        <span class="value">${viewModel.contactLink}</span>
                     </div>
                 </div>
                 
@@ -242,7 +321,7 @@ private fun generateEducationData(viewModel: ResumeViewModel): String {
             """
         <div id="education-section">
             <h3>EDUCATION</h3>
-            
+            <hr>
         """.trimIndent()
         )
 
@@ -280,7 +359,7 @@ private fun generateWorkExperienceData(viewModel: ResumeViewModel): String {
             """
         <div id="experience-section">
             <h3>WORK EXPERIENCE</h3>
-           
+            <hr>
         """.trimIndent()
         )
 
@@ -292,7 +371,7 @@ private fun generateWorkExperienceData(viewModel: ResumeViewModel): String {
                 <div class="work-details">
                     <div class="company" style="font-weight: bold;">${item.companyName}</div>
                     <div class="job-title">${item.jobTitle}</div>
-                    <div class="job-details">&#8226; ${item.details}</div>
+                    <div class="job-details">${item.details}</div>
                 </div>
             </div>
             """.trimIndent()
@@ -319,7 +398,7 @@ private fun generateProjectData(viewModel: ResumeViewModel): String {
             """
         <div id="projects-section">
             <h3>PROJECTS</h3>
-          
+            <hr>
         """.trimIndent()
         )
 
@@ -353,6 +432,7 @@ private fun generateAboutMeData(viewModel: ResumeViewModel): String {
             """
         <div id="about-me-section">
             <h3>ABOUT ME</h3>
+            <hr>
         """.trimIndent()
         )
 
@@ -361,7 +441,7 @@ private fun generateAboutMeData(viewModel: ResumeViewModel): String {
             aboutMeData.append(
                 """
             <div class="about-me-item">
-                <p style="font-size: 15px;"><span">Date of Birth:</span> ${viewModel.dateOfBirth}</p>
+                <p style="font-size: 13px;"><span">Date of Birth:</span> ${viewModel.dateOfBirth}</p>
             </div>
             """.trimIndent()
             )
@@ -372,7 +452,7 @@ private fun generateAboutMeData(viewModel: ResumeViewModel): String {
             aboutMeData.append(
                 """
             <div class="about-me-item">
-                <p style="font-size: 15px; text-align: justify; text-justify: inter-word; word-wrap: break-word;">$aboutMe</p>
+                <p style="font-size: 17px; text-align: justify; text-justify: inter-word; word-wrap: break-word;">$aboutMe</p>
             </div>
             """.trimIndent()
             )
@@ -394,9 +474,9 @@ private fun generateInterestsData(viewModel: ResumeViewModel): String {
             """
         <div id="interests-section">
             <h3>INTERESTS</h3>
-           
+            <hr>
             <div class="interests-item">
-                <p style="font-size: 15px; text-align: justify; text-justify: inter-word; word-wrap: break-word;">$interests</p>
+                <p style="font-size: 17px; text-align: justify; text-justify: inter-word; word-wrap: break-word;">$interests</p>
             </div>
         </div>
         """.trimIndent()

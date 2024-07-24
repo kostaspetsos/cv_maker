@@ -47,6 +47,25 @@
         android:overScrollMode="never">
     </WebView>
 
+    <WebView
+        android:id="@+id/preview_hidden_WebView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        app:layout_constraintDimensionRatio="H, 1:1.4"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTemplates"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_default="wrap"
+        android:layout_marginBottom="70dp"
+        android:background="#FFFFFF"
+        android:isScrollContainer="true"
+        android:scrollbars="vertical|horizontal"
+        android:layout_marginHorizontal="15dp"
+        android:overScrollMode="never">
+    </WebView>
+
     <ImageButton
         android:id="@+id/back_btn"
         android:layout_width="50dp"

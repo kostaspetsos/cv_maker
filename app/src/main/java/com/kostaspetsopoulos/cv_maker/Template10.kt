@@ -2,7 +2,7 @@ package com.kostaspetsopoulos.cv_maker
 
 import java.util.*
 
-class Template5 : Template {
+class Template10 : Template {
     private val viewModel: ResumeViewModel = ResumeViewModel()
 
     override fun fillTemplate(viewModel: ResumeViewModel): String {
@@ -22,9 +22,9 @@ class Template5 : Template {
                         min-height: 29.7cm;
                     }
    
-                    #profile-info {      /* NAME & SURNAME & contact-details    */
+                    #profile-info {      /* NAME & SURNAME    */
                         position: relative;
-                        color: #32a895;
+                        color: #f27275;
                         z-index: 2;
                         max-width: 696px;
                     }
@@ -83,7 +83,7 @@ class Template5 : Template {
                     #experience-section h3,
                     #interests-section h3 {
                         font-size: 15px;
-                        color: #32a895;
+                        color: #f27275;
                         margin-bottom: 2px;
                         page-break-after: avoid;
                     }

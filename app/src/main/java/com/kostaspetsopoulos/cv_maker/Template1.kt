@@ -7,155 +7,137 @@ class Template1 : Template {
     private val viewModel: ResumeViewModel = ResumeViewModel()
 
     override fun fillTemplate(viewModel: ResumeViewModel): String {
-        // Replace placeholders in the template with actual data
-        val educationData = generateEducationData(viewModel)
-        val workExperienceData = generateWorkExperienceData(viewModel)
-        val projectData = generateProjectData(viewModel)
-        val interestsData = generateInterestsData(viewModel)
-        val aboutMeData = generateAboutMeData(viewModel)
+
         var filledTemplate = """
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Your CV</title>
-        <style>
-            .print-body {
-                background-color: #ffffff;
-            }
-            @font-face {
-                font-family: 'Jost';
-                src: url('jost.ttf') format('truetype');
-            }
-
-            body {
-                background-color: #ffffff;
-                font-family: 'Jost', sans-serif;
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                width: 21cm;
-                min-height: 29.7cm
-            }
-
-            .header h1 {
-                color: #333;
-                margin: 0;
-                margin-top: 70px;
-                margin-bottom: 10px;
-                font-size: 24px;
-            }
-
-            .header {
-                text-align: center;
-                background-color: #ffffff;
-                padding: 3px;
-                margin-bottom: 0;
-            }
-
-            .personal-info {
-                margin: 0;
-                padding-top: 0;
-                padding-bottom: 0;
-                margin-bottom: 4px;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
-                font-size: 17px;
-            }
-
-            .personal-info p {
-                display: inline-block;
-                margin-right: 3px;
-            }
-            
-            hr {
-                margin: 0;
-            }
-
-            .header img {
-                max-width: 100%;
-                max-height: 150px;
-                border-radius: 50%;
-                margin-top: 20px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            }
-            
-
-            .header h2,
-            .education h2,
-            .work-experience h2,
-            .projects h2,
-            .about-me h2,
-            .interests h2 {
-                color: #333;
-                padding-bottom: 5px;
-                margin-top: 20px;
-                margin-bottom: 0px;
-                font-size: 17px;
-                text-align: center;
-            }
-
-            h3 {
-                text-align: left;
-                color: #555;
-                margin-bottom: 5px;
-                font-size: 10px;
-            }
-
-            p {
-                margin: 0;
-                color: #333;
-            }
-
-            a {
-                color: #4285f4;
-                text-decoration: none;
-                font-size: 10px;
-            }
-
-            a:hover {
-                text-decoration: underline;
-            }
-        </style>
-    </head>
-    <body class="print-body">
-
-        <div class="header">
-            <h1>${viewModel.firstName} ${viewModel.lastName}</h1>            
-            <!-- Add photo here if available -->
-            <!--
-            <img src="${viewModel.profileImageUri}" alt="Your Photo">
-            -->
-        </div>
-
-        <div class="personal-info" style="text-align: center;">
-            <p>${viewModel.address}</p>
-            <p>|</p>
-            <p>${viewModel.phoneNumber}</p>
-            <p>|</p>
-            <p>${viewModel.contactLink}</p>
-            <p>|</p>
-            <p>${viewModel.email}</p>
-        </div>
-
-        <hr> <!-- Add a horizontal line below the header -->
-
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Your CV</title>
+                <style>
+                    body {
+                        font-family: 'helvetica', serif;
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                        width: 21cm;
+                        min-height: 29.7cm
+                    }
         
-            ${generateEducationData(viewModel)}
+                    .header h1 {
+                        color: #333;
+                        margin: 0;
+                        margin-top: 70px;
+                        margin-bottom: 10px;
+                        font-size: 24px;
+                    }
+        
+                    .header {
+                        text-align: center;
+                        background-color: #ffffff;
+                        padding: 3px;
+                        margin-bottom: 0;
+                    }
+        
+                    .personal-info {
+                        margin: 0;
+                        padding-top: 0;
+                        padding-bottom: 0;
+                        margin-bottom: 4px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 17px;
+                    }
+        
+                    .personal-info p {
+                        display: inline-block;
+                        margin-right: 3px;
+                    }
+                    
+                    hr {
+                        margin: 0;
+                    }
+        
+                    .header img {
+                        max-width: 100%;
+                        max-height: 150px;
+                        border-radius: 50%;
+                        margin-top: 20px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    }
+                    
+        
+                    .header h2,
+                    .education h2,
+                    .work-experience h2,
+                    .projects h2,
+                    .about-me h2,
+                    .interests h2 {
+                        color: #333;
+                        padding-bottom: 5px;
+                        margin-top: 20px;
+                        margin-bottom: 0px;
+                        font-size: 17px;
+                        text-align: center;
+                    }
+        
+                    h3 {
+                        text-align: left;
+                        color: #555;
+                        margin-bottom: 5px;
+                        font-size: 10px;
+                    }
+        
+                    p {
+                        margin: 0;
+                        color: #333;
+                    }
+        
+                    a {
+                        color: #4285f4;
+                        text-decoration: none;
+                        font-size: 10px;
+                    }
+        
+                    a:hover {
+                        text-decoration: underline;
+                    }
+                </style>
+            </head>
+            <body class="print-body">
+        
+                <div class="header">
+                    <h1>${viewModel.firstName} ${viewModel.lastName}</h1>            
+                </div>
+        
+                <div class="personal-info" style="text-align: center;">
+                    <p>${viewModel.address}</p>
+                    <p>|</p>
+                    <p>${viewModel.phoneNumber}</p>
+                    <p>|</p>
+                    <p>${viewModel.contactLink}</p>
+                    <p>|</p>
+                    <p>${viewModel.email}</p>
+                </div>
+        
+                <hr> <!-- Add a horizontal line below the header -->
+        
+                
+                    ${generateEducationData(viewModel)}
+                    
+                    ${generateWorkExperienceData(viewModel)}
             
-            ${generateWorkExperienceData(viewModel)}
-    
-            ${generateProjectData(viewModel)}  
-    
-            ${generateInterestsData(viewModel)}
-
-            ${generateAboutMeData(viewModel)}
-    
-        </body>
-        </html>
+                    ${generateProjectData(viewModel)}  
+            
+                    ${generateInterestsData(viewModel)}
+        
+                    ${generateAboutMeData(viewModel)}
+            
+                </body>
+                </html>
     """.trimIndent()
 
 

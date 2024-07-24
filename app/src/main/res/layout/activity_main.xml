@@ -6,27 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--  <androidx.fragment.app.FragmentContainerView
-          android:id="@+id/fragmentContainerView"
-          android:name="com.kostaspetsopoulos.cv_maker.NameSurnameScreen"
-          android:layout_width="match_parent"
-          android:layout_height="0dp"
-          android:layout_marginTop="50dp"
-          android:background="@android:color/background_light"
-          android:visibility="visible"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          tools:layout="@layout/fragment_1" />
-
-      <Button
-          android:id="@+id/button"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Next"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />  -->
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"

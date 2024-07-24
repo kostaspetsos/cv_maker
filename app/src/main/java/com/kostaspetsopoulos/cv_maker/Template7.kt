@@ -2,7 +2,7 @@ package com.kostaspetsopoulos.cv_maker
 
 import java.util.*
 
-class Template6 : Template {
+class Template7 : Template {
     private val viewModel: ResumeViewModel = ResumeViewModel()
 
     override fun fillTemplate(viewModel: ResumeViewModel): String {
@@ -44,37 +44,27 @@ class Template6 : Template {
                     }
 
                     .profile-pic-container {
-                        margin-left: 1px;
+                        margin-left: -40px;
                         margin-top: 30px;
                         position: relative;
-                        width: 180px; /* To width tou circle */
-                        height: 180px; /* tou circle */
-                    }
-                    
-                    .white-circle {
-                        width: 100%; 
-                        height: 100%; 
-                        background-color: white;
-                        border-radius: 50%; /* This will create a circle */
-                        position: absolute;
-                        top: 0;
-                        left: 0;
+                        width: 160px; /* To width tou circle */
+                        height: 160px; /* tou circle */
                     }
                     
                     #profile-photo {
-                        width: 170px; 
-                        height: 170px; 
-                        border-radius: 50%;
+                        width: 257px; 
+                        height: 257px; 
+                        
                         position: absolute;
-                        margin-left: 5px;
-                        margin-top: 5px;
+                        margin-left: 0.5px;
+                        margin-top: 0px;
                         z-index: 1;
                     }
                     
                     #profile-info {
                         position: absolute;
                         align-items: center;
-                        margin-top: 27px;
+                        margin-top: 60px;
                         margin-left: 240px; /* Adjust as needed */
                         color: #4a4a4a;
                         z-index: 2; /* Ensure the text is on top of the photo */
@@ -93,7 +83,7 @@ class Template6 : Template {
                         position: absolute;
                         display: flex;
                         margin-left: -20px;
-                        margin-top: 210px;
+                        margin-top: 290px;
                         font-size: 13px;
                         font-weight: 400;
                         color: white;
@@ -117,7 +107,7 @@ class Template6 : Template {
                         position: absolute;
                         display: flex;
                         margin-left: -20px;
-                        margin-top: 250px;
+                        margin-top: 330px;
                         font-size: 13px;
                         font-weight: 400;
                         color: white;
@@ -141,7 +131,7 @@ class Template6 : Template {
                         position: absolute;
                         display: flex;
                         margin-left: -20px;
-                        margin-top: 290px;
+                        margin-top: 370px;
                         font-size: 13px;
                         font-weight: 400;
                         color: white;
@@ -165,7 +155,7 @@ class Template6 : Template {
                         position: absolute;
                         display: flex;
                         margin-left: -20px;
-                        margin-top: 330px;
+                        margin-top: 410px;
                         font-size: 13px;
                         font-weight: 400;
                         color: white;
@@ -187,6 +177,7 @@ class Template6 : Template {
                     
                     #education-section {
                         margin-left: 240px; /* Add left margin */
+                        margin-top: 120px;
                     }
                     
                     #about-me-section,

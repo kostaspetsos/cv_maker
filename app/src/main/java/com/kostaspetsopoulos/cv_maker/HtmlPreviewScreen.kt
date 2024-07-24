@@ -18,6 +18,7 @@ import android.webkit.WebView
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 
 class HtmlPreviewScreen : Fragment() {
@@ -43,8 +44,11 @@ class HtmlPreviewScreen : Fragment() {
         val selectedTemplateName =
             sharedPreferences.getString("selected_template", "Template 1") ?: "Template 1"
 
+        var templateNameForWebview = "";
+
         // Preview HTML on Screen
         val webView = view.findViewById<WebView>(R.id.preview_WebView)
+        val hiddenWebview = view.findViewById<WebView>(R.id.preview_hidden_WebView)
 
         // Configure WebView settings
         webView.settings.apply {
@@ -66,38 +70,60 @@ class HtmlPreviewScreen : Fragment() {
             allowContentAccess = true // Allow access to the content URL
 
 
-            /*
+
             // Apply font settings based on the selected template
             when (selectedTemplateName) {
-                "Template 1", "Template 3", "Template 5" -> {
-                    // For templates 1, 3, and 5, use Jost font
+                "Template 1", "Template 2", "Template 5", "Template 3", "Template 4", "Template 6"  -> {
+
                     val fontPath = "file:///android_res/font/jost.ttf"
                     val fontFamily = "Jost"
                     setFontFamily(webView, fontPath, fontFamily)
                 }
-                "Template 2", "Template 4", "Template 6" -> {
-                    // For templates 2, 4, and 6, use Cambria font
+                /*"Template 4" -> {
+
                     val fontPath = "file:///android_res/font/cambria.ttf"
                     val fontFamily = "Cambria"
                     setFontFamily(webView, fontPath, fontFamily)
-                }
+                }  */
                 else -> {
                     // Default font settings
                     // For any other template, use default font settings
                 }
-            }   */
+            }
+        }
+
+        // Apply font settings based on the selected template
+        templateNameForWebview = when (selectedTemplateName) {
+            "Template 6", "Template 7" -> {
+                "$selectedTemplateName Responsive";
+            }
+            else -> {
+                "$selectedTemplateName";
+            }
         }
 
         // Set the initial scale (zoom level) to 100%
         webView.setInitialScale(100)
 
-        val htmlGenerator = HtmlGenerator(requireContext(), viewModel, webView, selectedTemplateName)
+        val htmlGenerator = HtmlGenerator(requireContext(), viewModel, webView, templateNameForWebview)
         htmlGenerator.generateHtml()
+
+
+        val btnBck = view.findViewById<ImageButton>(R.id.back_btn)
+        btnBck.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment9_to_fragment8)
+        }
+
 
         // Generate PDF when the "Make PDF" button is clicked
         val makePdfBtn = view.findViewById<ImageButton>(R.id.makePDFbtn)
         makePdfBtn.setOnClickListener {
-            val htmlContent = htmlGenerator.getFilledTemplate()
+            val htmlGeneratorForExport = HtmlGenerator(requireContext(), viewModel, hiddenWebview,
+                "$selectedTemplateName"
+            )
+            htmlGeneratorForExport.generateHtml()
+
+            val htmlContent = htmlGeneratorForExport.getFilledTemplate()
 
             // Get the user's first name and last name from the ViewModel
             val sanitizedFirstName =
@@ -111,7 +137,7 @@ class HtmlPreviewScreen : Fragment() {
                 "${sanitizedFirstName}_${sanitizedLastName}_cv_$timestamp.pdf"
 
             try {
-                htmlGenerator.generatePdf(htmlContent, fileName)
+                htmlGeneratorForExport.generatePdf(htmlContent, fileName)
             } catch (e: Exception) {
                 e.printStackTrace()
                 showSnackbar("Error generating PDF")
