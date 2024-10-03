@@ -7,19 +7,6 @@ class Template3 : Template {
 
     override fun fillTemplate(viewModel: ResumeViewModel): String {
 
-        /* @font-face {
-            font-family: 'Jost';
-            src: url('file:///android_res/font/jost.ttf') format('truetype');
-        }
-
-        body {
-            font-family: 'Jost', sans-serif;
-            box-sizing: border-box;
-            width: 696px;
-            min-height: 29.7cm;
-        }
-         */
-
         var filledTemplate = """
             <!DOCTYPE html>
             <html lang="en">
@@ -28,207 +15,207 @@ class Template3 : Template {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Your CV</title>
                 <style>
-                body {
-                    font-family: 'helvetica', serif;
-                    box-sizing: border-box;
-                    width: 696px;
-                    min-height: 29.7cm;
-                }
-                
-                /* Blue Bar on top of the page */
-                #top-bar {  
-                    width: 700px;
-                    height: 60px; /* Double the original size */
-                    display: flex;
-                    justify-content: space-between;
-                    background-color: #376894;
-                    position: relative; /* Required for positioning children */
-                    z-index: 0; 
-                }
-            
-                .profile-pic-container {
-                    margin-left: 20px;
-                    margin-top: 30px;
-                    position: relative;
-                    width: 120px; /* To width tou circle */
-                    height: 120px; /* tou circle */
-                }
-            
-                .white-circle {
-                    width: 100%; 
-                    height: 100%; 
-                    background-color: white;
-                    border-radius: 50%; /* This will create a circle */
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                }
-            
-                #profile-photo {
-                    width: 100px; 
-                    height: 100px; 
-                    border-radius: 50%;
-                    position: absolute;
-                    margin-left: 10px;
-                    margin-top: 10px;
-                    z-index: 1;
-                }
-        
-                #profile-info {
-                    position: absolute;
-                    align-items: center;
-                    margin-top: 20px;
-                    margin-left: 160px; /* Adjust as needed */
-                    color: white; /* Change to your desired color */
-                    z-index: 2; /* Ensure the text is on top of the photo */
-                }
-            
-                #profile-info h2 {
-                    margin: 0; /* Remove default margin */
-                }
-                
-                .phone {
-                    position: absolute;
-                    display: flex;
-                    margin-left: 160px;
-                    margin-top: 20px;
-                    font-size: 10px;
-                    font-weight: bold;
-                }
-        
-                .phone .label {
-                    margin-right: 5px; /* Adjust spacing between label and value as needed */
-                    font-size: 10px;
-                    font-weight: bold;
-                }
-                
-                .email {
-                    position: absolute;
-                    display: flex;
-                    margin-left: 160px;
-                    margin-top: 40px;
-                    font-size: 10px;
-                    font-weight: bold;
-                }
-        
-                .email .label {
-                    margin-right: 10px; /* Adjust spacing between label and value as needed */
-                    font-size: 10px;
-                    font-weight: bold;
-                }
-        
-                .address {
-                    position: absolute;
-                    display: flex;
-                    white-space: nowrap; /* When i have space between words it wont move to a different row */
-                    margin-left: 400px;
-                    margin-top: 20px;
-                    font-size: 10px;
-                    font-weight: bold;
-                }
-        
-                .address .label {
-                    margin-right: 5px; /* Adjust spacing between label and value as needed */
-                    font-size: 10px;
-                    font-weight: bold;
-                }
-                
-                .contactLink {
-                    position: absolute;
-                    display: flex;
-                    margin-left: 400px;
-                    margin-top: 40px;
-                    font-size: 10px;
-                    font-weight: bold;
-                }
-        
-                .contactLink .label {
-                    margin-right: 10px; /* Adjust spacing between label and value as needed */
-                    font-size: 10px;
-                    font-weight: bold;
-                }
-                
-                #education-section {
-                    margin-top: 120px;
-                }
-                
-                #about-me-section,
-                #projects-section,
-                #experience-section,
-                #interests-section {
-                    margin-top: 50px;
+                    body {
+                        font-family: 'helvetica', serif;
+                        box-sizing: border-box;
+                        width: 696px;
+                        min-height: 29.7cm;
+                    }
                     
-                }
-        
-                #about-me-section h3,
-                #projects-section h3,
-                #education-section h3,
-                #experience-section h3,
-                #interests-section h3 {
-                    font-size: 18px;
-                    color: #376894;
-                    margin-bottom: 2px;
-                    page-break-after: avoid;
-                }
-        
-                #about-me-section hr,
-                #projects-section hr,
-                #education-section hr,
-                #experience-section hr,
-                #interests-section hr {
-                    border: 1px solid #376894;
-                    margin-bottom: 15px;
-                    margin-top: 2px;
-                }
-        
-                .experience-item,
-                .education-item {
-                    display: flex;
-                    align-items: flex-start;
-                    margin-bottom: 15px;
-                }
-        
-                .time-period {
-                    width: 280px;
-                }
-        
-                .education-details {
-                    margin-right: 0px;
-                    width: 600px;
-                }
-            
-                .work-details {
-                    margin-right: 0px;
-                    width: 600px;
-                }
-        
-                .company,
-                .university,
-                .interests-title {
-                    font-weight: bold;
-                }
-            
-                .project-title {
-                    font-weight: bold;
-                    margin-bottom: 5px; 
-                }
-        
-                .project-description {
-                    font-size: 17px;
-                    text-align: justify;
-                    text-justify: inter-word;
-                    word-wrap: break-word;
-                    margin-top: 0; /* Remove any top margin */
-                    margin-bottom: 0; /* Remove any bottom margin */
-                }
-        
-        
-                .project-item,
-                .interests-item {
-                    margin-bottom: 15px;
-                }
+                    /* Blue Bar on top of the page */
+                    #top-bar {  
+                        width: 700px;
+                        height: 60px; /* Double the original size */
+                        display: flex;
+                        justify-content: space-between;
+                        background-color: #376894;
+                        position: relative; /* Required for positioning children */
+                        z-index: 0; 
+                    }
                 
+                    .profile-pic-container {
+                        margin-left: 20px;
+                        margin-top: 30px;
+                        position: relative;
+                        width: 120px; /* To width tou circle */
+                        height: 120px; /* tou circle */
+                    }
                 
+                    .white-circle {
+                        width: 100%; 
+                        height: 100%; 
+                        background-color: white;
+                        border-radius: 50%; /* This will create a circle */
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                    }
+                
+                    #profile-photo {
+                        width: 100px; 
+                        height: 100px; 
+                        border-radius: 50%;
+                        position: absolute;
+                        margin-left: 10px;
+                        margin-top: 10px;
+                        z-index: 1;
+                    }
+            
+                    #profile-info {
+                        position: absolute;
+                        align-items: center;
+                        margin-top: 20px;
+                        margin-left: 160px; /* Adjust as needed */
+                        color: white; /* Change to your desired color */
+                        z-index: 2; /* Ensure the text is on top of the photo */
+                    }
+                
+                    #profile-info h2 {
+                        margin: 0; /* Remove default margin */
+                    }
+                    
+                    .phone {
+                        position: absolute;
+                        display: flex;
+                        margin-left: 160px;
+                        margin-top: 20px;
+                        font-size: 10px;
+                        font-weight: bold;
+                    }
+            
+                    .phone .label {
+                        margin-right: 5px; /* Adjust spacing between label and value as needed */
+                        font-size: 10px;
+                        font-weight: bold;
+                    }
+                    
+                    .email {
+                        position: absolute;
+                        display: flex;
+                        margin-left: 160px;
+                        margin-top: 40px;
+                        font-size: 10px;
+                        font-weight: bold;
+                    }
+            
+                    .email .label {
+                        margin-right: 10px; /* Adjust spacing between label and value as needed */
+                        font-size: 10px;
+                        font-weight: bold;
+                    }
+            
+                    .address {
+                        position: absolute;
+                        display: flex;
+                        white-space: nowrap; /* When i have space between words it wont move to a different row */
+                        margin-left: 400px;
+                        margin-top: 20px;
+                        font-size: 10px;
+                        font-weight: bold;
+                    }
+            
+                    .address .label {
+                        margin-right: 5px; /* Adjust spacing between label and value as needed */
+                        font-size: 10px;
+                        font-weight: bold;
+                    }
+                    
+                    .contactLink {
+                        position: absolute;
+                        display: flex;
+                        margin-left: 400px;
+                        margin-top: 40px;
+                        font-size: 10px;
+                        font-weight: bold;
+                    }
+            
+                    .contactLink .label {
+                        margin-right: 10px; /* Adjust spacing between label and value as needed */
+                        font-size: 10px;
+                        font-weight: bold;
+                    }
+                    
+                    #education-section {
+                        margin-top: 120px;
+                    }
+                    
+                    #about-me-section,
+                    #projects-section,
+                    #experience-section,
+                    #interests-section {
+                        margin-top: 50px;
+                        
+                    }
+            
+                    #about-me-section h3,
+                    #projects-section h3,
+                    #education-section h3,
+                    #experience-section h3,
+                    #interests-section h3 {
+                        font-size: 18px;
+                        color: #376894;
+                        margin-bottom: 2px;
+                        page-break-after: avoid;
+                    }
+            
+                    #about-me-section hr,
+                    #projects-section hr,
+                    #education-section hr,
+                    #experience-section hr,
+                    #interests-section hr {
+                        border: 1px solid #376894;
+                        margin-bottom: 15px;
+                        margin-top: 2px;
+                    }
+            
+                    .experience-item,
+                    .education-item {
+                        display: flex;
+                        align-items: flex-start;
+                        margin-bottom: 15px;
+                    }
+            
+                    .time-period {
+                        width: 280px;
+                    }
+            
+                    .education-details {
+                        margin-right: 0px;
+                        width: 600px;
+                    }
+                
+                    .work-details {
+                        margin-right: 0px;
+                        width: 600px;
+                    }
+            
+                    .company,
+                    .university,
+                    .interests-title {
+                        font-weight: bold;
+                    }
+                
+                    .project-title {
+                        font-weight: bold;
+                        margin-bottom: 5px; 
+                    }
+            
+                    .project-description {
+                        font-size: 17px;
+                        text-align: justify;
+                        text-justify: inter-word;
+                        word-wrap: break-word;
+                        margin-top: 0; /* Remove any top margin */
+                        margin-bottom: 0; /* Remove any bottom margin */
+                    }
+            
+            
+                    .project-item,
+                    .interests-item {
+                        margin-bottom: 15px;
+                    }
+                    
+                    
                 </style>
             </head>
             <body>

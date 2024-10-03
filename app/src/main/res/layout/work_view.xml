@@ -65,7 +65,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewJobTitle"
         android:background="@android:color/transparent"
-        android:inputType="textCapCharacters"
         android:hint="@string/weHint2"
         android:padding="8dp"
         android:textSize="16sp"

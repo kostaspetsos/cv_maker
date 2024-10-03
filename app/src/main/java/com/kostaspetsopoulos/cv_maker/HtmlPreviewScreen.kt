@@ -16,6 +16,7 @@ import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -192,6 +193,16 @@ class HtmlPreviewScreen : Fragment() {
         documentsFolderButton.setOnClickListener {
             openFileExplorerInDocumentsFolder()
         }
+
+        // Retrieve the selected template name from SharedPreferences
+        val sharedPreferences =
+            requireContext().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE)
+        val selectedTemplateName =
+            sharedPreferences.getString("selected_template", "Template 1") ?: "Template 1"
+
+        var selectedTemplate = view.findViewById<TextView>(R.id.selectedTemplate)
+        selectedTemplate.text = selectedTemplateName
+
     }
 
     private fun openFileExplorerInDocumentsFolder() {

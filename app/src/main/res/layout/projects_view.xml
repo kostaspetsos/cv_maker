@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewProjectTitle"
         android:background="@android:color/transparent"
-        android:inputType="textCapCharacters"
         android:textAllCaps="true"
         android:hint="@string/pHint1"
         android:padding="8dp"

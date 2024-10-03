@@ -63,14 +63,29 @@ class PdfGenerator(private val context: Context, private val templateName: Strin
 
 
             //IF that checks what template the user selected and assigns it's Font accordingly.
-            if(templateName == "Template 5") {
+            if(templateName == "Template 6" || templateName == "Template 7") {
                 // Create FontProvider and register the custom font
                 val fontProvider = FontProvider()
                 fontProvider.addFont(context.resources.openRawResource(R.raw.jost).readBytes(), PdfEncodings.IDENTITY_H)
 
                 // Set the FontProvider to the document
-
                 properties.fontProvider = fontProvider
+            } else if (templateName == "Template 3" || templateName == "Template 8") {
+                // Create FontProvider and register the custom font
+                val fontProvider = FontProvider()
+                fontProvider.addFont(context.resources.openRawResource(R.raw.century_gothic).readBytes(), PdfEncodings.IDENTITY_H)
+
+                // Set the FontProvider to the document
+                properties.fontProvider = fontProvider
+            } else if (templateName == "Template 4" || templateName == "Template 9") {
+                // Create FontProvider and register the custom font
+                val fontProvider = FontProvider()
+                fontProvider.addFont(context.resources.openRawResource(R.raw.gill_sans).readBytes(), PdfEncodings.IDENTITY_H)
+
+                // Set the FontProvider to the document
+                properties.fontProvider = fontProvider
+            } else if (templateName == "Template 5" || templateName == "Template 10") {
+
             }
 
 

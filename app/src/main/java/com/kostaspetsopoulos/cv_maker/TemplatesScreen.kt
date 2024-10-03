@@ -163,10 +163,10 @@ class TemplatesScreen : Fragment() {
         exampleItems.add(TemplateItem("Template 3", R.drawable.temp3_preview))
         exampleItems.add(TemplateItem("Template 4", R.drawable.temp4_preview))
         exampleItems.add(TemplateItem("Template 5", R.drawable.temp5_preview))
-        exampleItems.add(TemplateItem("Template 6", R.drawable.temp5_preview))
-        exampleItems.add(TemplateItem("Template 7", R.drawable.temp5_preview))
-        exampleItems.add(TemplateItem("Template 8", R.drawable.temp3_preview))
-        exampleItems.add(TemplateItem("Template 9", R.drawable.temp4_preview))
+        exampleItems.add(TemplateItem("Template 6", R.drawable.temp6_preview))
+        exampleItems.add(TemplateItem("Template 7", R.drawable.temp7_preview))
+        exampleItems.add(TemplateItem("Template 8", R.drawable.temp8_preview))
+        exampleItems.add(TemplateItem("Template 9", R.drawable.temp9_preview))
         exampleItems.add(TemplateItem("Template 10", R.drawable.temp5_preview))
         return exampleItems
     }
