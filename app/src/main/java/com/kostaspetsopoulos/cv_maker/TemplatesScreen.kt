@@ -167,7 +167,7 @@ class TemplatesScreen : Fragment() {
         exampleItems.add(TemplateItem("Template 7", R.drawable.temp7_preview))
         exampleItems.add(TemplateItem("Template 8", R.drawable.temp8_preview))
         exampleItems.add(TemplateItem("Template 9", R.drawable.temp9_preview))
-        exampleItems.add(TemplateItem("Template 10", R.drawable.temp5_preview))
+        exampleItems.add(TemplateItem("Template 10", R.drawable.temp10_preview))
         return exampleItems
     }
 

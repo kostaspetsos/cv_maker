@@ -59,16 +59,7 @@ class Template1 : Template {
                     
                     hr {
                         margin: 0;
-                    }
-        
-                    .header img {
-                        max-width: 100%;
-                        max-height: 150px;
-                        border-radius: 50%;
-                        margin-top: 20px;
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                    }
-                    
+                    }               
         
                     .header h2,
                     .education h2,

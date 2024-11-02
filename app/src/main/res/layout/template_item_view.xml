@@ -17,6 +17,4 @@
         android:scaleType="fitCenter"
         android:background="@drawable/template_background"/>
 
-    <!-- Your content goes here -->
-
 </LinearLayout>

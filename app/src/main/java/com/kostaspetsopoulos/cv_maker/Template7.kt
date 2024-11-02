@@ -187,6 +187,7 @@ class Template7 : Template {
                         margin-left: 240px; /* Add left margin */
                         color: #4a4a4a;
                         margin-top: 50px;
+                        page-break-inside: avoid;
                     }
                     
                     #about-me-section h3,

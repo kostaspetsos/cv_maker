@@ -139,7 +139,7 @@ class Template4 : Template {
                     #interests-section {
                         margin-top: 50px;
                         color: #4a4a4a;
-                        
+                        page-break-inside: avoid;
                     }
 
                     #about-me-section h3,

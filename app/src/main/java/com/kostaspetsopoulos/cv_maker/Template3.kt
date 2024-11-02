@@ -144,7 +144,7 @@ class Template3 : Template {
                     #experience-section,
                     #interests-section {
                         margin-top: 50px;
-                        
+                        page-break-inside: avoid;
                     }
             
                     #about-me-section h3,
@@ -209,13 +209,22 @@ class Template3 : Template {
                         margin-bottom: 0; /* Remove any bottom margin */
                     }
             
-            
                     .project-item,
                     .interests-item {
                         margin-bottom: 15px;
                     }
                     
+                    /* Prevent breaks inside items like education or projects */
+                    .experience-item,
+                    .education-item,
+                    .project-item,
+                    .interests-item {
+                        page-break-inside: avoid; /* Ensure each item is on the same page */
+                        margin-bottom: 15px;
+                    }
                     
+                    
+    
                 </style>
             </head>
             <body>

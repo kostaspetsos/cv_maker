@@ -157,7 +157,7 @@ class Template8 : Template {
                 #experience-section,
                 #interests-section {
                     margin-top: 50px;
-                    
+                    page-break-inside: avoid;
                 }
         
                 #about-me-section h3,

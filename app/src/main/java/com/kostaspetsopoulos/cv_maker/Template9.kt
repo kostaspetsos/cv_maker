@@ -16,214 +16,214 @@ class Template9 : Template {
                 <title>Your CV</title>
                 <style>
                     body {
-    font-family: 'helvetica', serif;
-    box-sizing: border-box;
-    width: 696px;
-    min-height: 29.7cm;
-}
-
-/* Blue Bar on top of the page */
-#top-bar {  
-    width: 700px;
-    height: 120px; /* Double the original size */
-    display: flex;
-    justify-content: space-between;
-    background-color: #f9d0cc;
-    position: relative; /* Required for positioning children */
-    z-index: 0; 
-}
-
-#profile-photo {
-    width: 150px; 
-    height: 150px; 
-    border-radius: 50%;
-    position: absolute;
-    margin-left: 520px;
-    margin-top: 30px;
-    z-index: 2;
-}
-
-#profile-info {
-    position: absolute;
-    align-items: center;
-    margin-top: 30px;
-    margin-left: 20px; /* Adjust as needed */
-    color: white;
-    z-index: 2; /* Ensure the text is on top of the photo */
-    max-width: 450px;
-}
-
-#profile-info h2 {
-    margin: 0; /* Remove default margin */
-    font-size: 30px; /* Initial font size */
-    white-space: nowrap; /* Prevent line breaks */
-    overflow: hidden; /* Hide overflowing text */
-    text-overflow: ellipsis; /* Add ellipsis for overflow */
-}
-
-.phone {
-    position: absolute;
-    display: flex;
-    margin-left: 20px;
-    margin-top: 93px;
-    font-size: 13px;
-    font-weight: 400;
-    color: white;
-}
-
-.phone .label {
-    margin-right: 5px; /* Adjust spacing between label and value as needed */
-    font-size: 13px;
-    font-weight: 600;
-    color: white;
-}
-
-.email {
-    position: absolute;
-    display: flex;
-    margin-left: 200px;
-    margin-top: 93px;
-    font-size: 13px;
-    font-weight: 400;
-    color: white;
-}
-
-.email .label {
-    margin-right: 10px; /* Adjust spacing between label and value as needed */
-    font-size: 13px;
-    font-weight: 600;
-    color: white;
-}
-
-.address {
-    position: absolute;
-    display: flex;
-    margin-left: 20px;
-    margin-top: 130px;
-    font-size: 13px;
-    font-weight: 400;
-    color: #4a4a4a;
-}
-
-.address .label {
-    margin-right: 5px; /* Adjust spacing between label and value as needed */
-    font-size: 13px;
-    font-weight: 600;
-    color: #4a4a4a;
-}
-
-.contactLink {
-    position: absolute;
-    display: flex;
-    margin-left: 200px;
-    margin-top: 130px;
-    font-size: 13px;
-    font-weight: 400;
-    color: #4a4a4a;
-}
-
-.contactLink .label {
-    margin-right: 10px; /* Adjust spacing between label and value as needed */
-    font-size: 13px;
-    font-weight: 600;
-    color: #4a4a4a;
-}
-
-#education-section {
-    margin-top: 100px;
-}
-
-#about-me-section,
-#projects-section,
-#education-section,
-#experience-section,
-#interests-section {
-    margin-top: 50px;
-    color: #4a4a4a;
-    page-break-inside: avoid; /* Prevents page break inside the section */
-}
-
-#about-me-section h3,
-#projects-section h3,
-#education-section h3,
-#experience-section h3,
-#interests-section h3 {
-    font-size: 18px;
-    color: #4a4a4a;
-    margin-bottom: 2px;
-    page-break-after: avoid; /* Prevents page break after header */
-    page-break-before: avoid; /* Prevents page break before header */
-}
-
-#about-me-section hr,
-#projects-section hr,
-#education-section hr,
-#experience-section hr,
-#interests-section hr {
-    border: 1px solid #f9d0cc;
-    margin-bottom: 15px;
-    margin-top: 2px;
-    page-break-after: avoid; /* Prevents page break after horizontal rule */
-    page-break-before: avoid; /* Prevents page break before horizontal rule */
-}
-
-.experience-item,
-.education-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 15px;
-    margin-bottom: 15px;
-    color: #4a4a4a;
-}
-
-.time-period {
-    width: 280px;
-}
-
-.education-details {
-    margin-right: 0px;
-    width: 600px;
-}
-
-.work-details {
-    margin-right: 0px;
-    width: 600px;
-}
-
-.job-details {
-    overflow-wrap: break-word; /* For newer browsers */
-    word-wrap: break-word; /* For older browsers */
-    margin-top: 5px;
-}
-
-.company,
-.university,
-.interests-title {
-    font-weight: bold;
-    color: #4a4a4a;
-}
-
-.project-title {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #4a4a4a;
-}
-
-.project-description {
-    font-size: 17px;
-    text-align: justify;
-    text-justify: inter-word;
-    word-wrap: break-word;
-    margin-top: 0; /* Remove any top margin */
-    margin-bottom: 0; /* Remove any bottom margin */
-    color: #4a4a4a;
-}
-
-.project-item,
-.interests-item {
-    margin-bottom: 15px;
-    color: #4a4a4a;
-}
+                        font-family: 'helvetica', serif;
+                        box-sizing: border-box;
+                        width: 696px;
+                        min-height: 29.7cm;
+                    }
+                    
+                    /* Blue Bar on top of the page */
+                    #top-bar {  
+                        width: 700px;
+                        height: 120px; /* Double the original size */
+                        display: flex;
+                        justify-content: space-between;
+                        background-color: #f9d0cc;
+                        position: relative; /* Required for positioning children */
+                        z-index: 0; 
+                    }
+                    
+                    #profile-photo {
+                        width: 150px; 
+                        height: 150px; 
+                        border-radius: 50%;
+                        position: absolute;
+                        margin-left: 520px;
+                        margin-top: 30px;
+                        z-index: 2;
+                    }
+                    
+                    #profile-info {
+                        position: absolute;
+                        align-items: center;
+                        margin-top: 30px;
+                        margin-left: 20px; /* Adjust as needed */
+                        color: white;
+                        z-index: 2; /* Ensure the text is on top of the photo */
+                        max-width: 450px;
+                    }
+                    
+                    #profile-info h2 {
+                        margin: 0; /* Remove default margin */
+                        font-size: 30px; /* Initial font size */
+                        white-space: nowrap; /* Prevent line breaks */
+                        overflow: hidden; /* Hide overflowing text */
+                        text-overflow: ellipsis; /* Add ellipsis for overflow */
+                    }
+                    
+                    .phone {
+                        position: absolute;
+                        display: flex;
+                        margin-left: 20px;
+                        margin-top: 93px;
+                        font-size: 13px;
+                        font-weight: 400;
+                        color: white;
+                    }
+                    
+                    .phone .label {
+                        margin-right: 5px; /* Adjust spacing between label and value as needed */
+                        font-size: 13px;
+                        font-weight: 600;
+                        color: white;
+                    }
+                    
+                    .email {
+                        position: absolute;
+                        display: flex;
+                        margin-left: 200px;
+                        margin-top: 93px;
+                        font-size: 13px;
+                        font-weight: 400;
+                        color: white;
+                    }
+                    
+                    .email .label {
+                        margin-right: 10px; /* Adjust spacing between label and value as needed */
+                        font-size: 13px;
+                        font-weight: 600;
+                        color: white;
+                    }
+                    
+                    .address {
+                        position: absolute;
+                        display: flex;
+                        margin-left: 20px;
+                        margin-top: 130px;
+                        font-size: 13px;
+                        font-weight: 400;
+                        color: #4a4a4a;
+                    }
+                    
+                    .address .label {
+                        margin-right: 5px; /* Adjust spacing between label and value as needed */
+                        font-size: 13px;
+                        font-weight: 600;
+                        color: #4a4a4a;
+                    }
+                    
+                    .contactLink {
+                        position: absolute;
+                        display: flex;
+                        margin-left: 200px;
+                        margin-top: 130px;
+                        font-size: 13px;
+                        font-weight: 400;
+                        color: #4a4a4a;
+                    }
+                    
+                    .contactLink .label {
+                        margin-right: 10px; /* Adjust spacing between label and value as needed */
+                        font-size: 13px;
+                        font-weight: 600;
+                        color: #4a4a4a;
+                    }
+                    
+                    #education-section {
+                        margin-top: 100px;
+                    }
+                    
+                    #about-me-section,
+                    #projects-section,
+                    #education-section,
+                    #experience-section,
+                    #interests-section {
+                        margin-top: 50px;
+                        color: #4a4a4a;
+                        page-break-inside: avoid;
+                    }
+                    
+                    #about-me-section h3,
+                    #projects-section h3,
+                    #education-section h3,
+                    #experience-section h3,
+                    #interests-section h3 {
+                        font-size: 18px;
+                        color: #4a4a4a;
+                        margin-bottom: 2px;
+                        page-break-after: avoid; /* Prevents page break after header */
+                        page-break-before: avoid; /* Prevents page break before header */
+                    }
+                    
+                    #about-me-section hr,
+                    #projects-section hr,
+                    #education-section hr,
+                    #experience-section hr,
+                    #interests-section hr {
+                        border: 1px solid #f9d0cc;
+                        margin-bottom: 15px;
+                        margin-top: 2px;
+                        page-break-after: avoid; /* Prevents page break after horizontal rule */
+                        page-break-before: avoid; /* Prevents page break before horizontal rule */
+                    }
+                    
+                    .experience-item,
+                    .education-item {
+                        display: flex;
+                        align-items: flex-start;
+                        margin-bottom: 15px;
+                        margin-bottom: 15px;
+                        color: #4a4a4a;
+                    }
+                    
+                    .time-period {
+                        width: 280px;
+                    }
+                    
+                    .education-details {
+                        margin-right: 0px;
+                        width: 600px;
+                    }
+                    
+                    .work-details {
+                        margin-right: 0px;
+                        width: 600px;
+                    }
+                    
+                    .job-details {
+                        overflow-wrap: break-word; /* For newer browsers */
+                        word-wrap: break-word; /* For older browsers */
+                        margin-top: 5px;
+                    }
+                    
+                    .company,
+                    .university,
+                    .interests-title {
+                        font-weight: bold;
+                        color: #4a4a4a;
+                    }
+                    
+                    .project-title {
+                        font-weight: bold;
+                        margin-bottom: 5px;
+                        color: #4a4a4a;
+                    }
+                    
+                    .project-description {
+                        font-size: 17px;
+                        text-align: justify;
+                        text-justify: inter-word;
+                        word-wrap: break-word;
+                        margin-top: 0; /* Remove any top margin */
+                        margin-bottom: 0; /* Remove any bottom margin */
+                        color: #4a4a4a;
+                    }
+                    
+                    .project-item,
+                    .interests-item {
+                        margin-bottom: 15px;
+                        color: #4a4a4a;
+                    }
 
                 </style>
             </head>

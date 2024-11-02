@@ -80,7 +80,7 @@ class PdfGenerator(private val context: Context, private val templateName: Strin
             } else if (templateName == "Template 4" || templateName == "Template 9") {
                 // Create FontProvider and register the custom font
                 val fontProvider = FontProvider()
-                fontProvider.addFont(context.resources.openRawResource(R.raw.gill_sans).readBytes(), PdfEncodings.IDENTITY_H)
+                fontProvider.addFont(context.resources.openRawResource(R.raw.zen_antique_regular).readBytes(), PdfEncodings.IDENTITY_H)
 
                 // Set the FontProvider to the document
                 properties.fontProvider = fontProvider
